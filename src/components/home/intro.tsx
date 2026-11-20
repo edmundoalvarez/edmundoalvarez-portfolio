@@ -20,7 +20,7 @@ export function HeroCard({ lang }: { lang: Locale }) {
       <div>
         <p className="mb-3 font-mono text-[13px] font-medium text-accent sm:mb-4 sm:text-sm">{ui.hello[lang]}</p>
         <h1 className="text-[clamp(2.4rem,7.5vw,4.25rem)] leading-[1.02] font-extrabold tracking-[-0.045em] text-balance">
-          {profile.role[lang]}.
+          {profile.headline[lang]}
         </h1>
       </div>
       <p className="max-w-[640px] text-base leading-relaxed text-body text-pretty sm:text-lg">{profile.summary[lang]}</p>

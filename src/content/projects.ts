@@ -31,8 +31,8 @@ export const valoo: CaseStudy = {
   name: "Valoo",
   client: "Lengar Studio",
   summary: {
-    es: "Plataforma de propinas digitales y gestión de equipos para gastronomía. Los clientes dejan propina y valoran al personal escaneando un QR; los comercios arman equipos, juntan las propinas en un pozo común y las reparten con reglas configurables.",
-    en: "Digital tipping and team management platform for hospitality. Guests tip and rate staff by scanning a personal QR code; venues build teams, pool tips and split them with configurable rules.",
+    es: "Plataforma de propinas digitales y gestión de equipos para gastronomía. El cliente escanea el QR de quien lo atendió, deja propina y valora el servicio. El comercio arma equipos, junta las propinas en un pozo común y las reparte con reglas propias.",
+    en: "Digital tipping and team management platform for hospitality. Guests scan the QR code of the person who served them, leave a tip and rate the service. Venues build teams, pool tips and split them with their own rules.",
   },
   stack: ["React Native", "Expo", "TypeScript", "Laravel", "MySQL", "Mercado Pago", "Docker", "pnpm", "EAS"],
   image: "/projects/icon-valoo.png",
@@ -113,8 +113,8 @@ export const studio: Project = {
   slug: "lengar-studio",
   name: "Lengar Studio",
   summary: {
-    es: "El sitio de mi estudio: animaciones con GSAP y Lenis, formulario de contacto con Resend y Turnstile, y un panel privado de cotización que arma presupuestos en PDF.",
-    en: "My studio's website: GSAP and Lenis animations, a contact form with Resend and Turnstile, and a private quoting panel that generates PDF estimates.",
+    es: "El sitio de mi estudio, con animaciones en GSAP y Lenis, formulario de contacto con Resend y Turnstile, y un panel privado que genera presupuestos en PDF.",
+    en: "My studio's website, with GSAP and Lenis animations, a contact form built on Resend and Turnstile, and a private panel that generates PDF quotes.",
   },
   stack: ["Next.js", "TypeScript", "GSAP", "Lenis", "Resend", "React PDF"],
   image: "/projects/lengar-home.jpg",
@@ -128,8 +128,8 @@ export const clientProjects: Project[] = [
     slug: "tekun",
     name: "Tekun Agropecuaria",
     summary: {
-      es: "Rediseño completo de la web institucional, nueva identidad de marca y posicionamiento en Google. Prerenderizado estático, clima y mercado del día, y tests end-to-end con chequeos de accesibilidad.",
-      en: "Full redesign of the company website, new brand identity and Google positioning. Statically prerendered, with live weather and market data and end-to-end tests with accessibility checks.",
+      es: "Rediseño de la web institucional y de la identidad de marca, con foco en el posicionamiento en Google. Incluye clima y mercados del día, y tests end-to-end que cubren accesibilidad.",
+      en: "Redesign of the company website and brand identity, focused on Google search visibility. It includes daily weather and market prices, plus end-to-end tests that cover accessibility.",
     },
     stack: ["React Router", "TypeScript", "Tailwind CSS", "Radix UI", "Playwright"],
     image: "/projects/tekun-devices.webp",
@@ -155,7 +155,7 @@ export const clientProjects: Project[] = [
     slug: "logistran",
     name: "Logistran",
     summary: {
-      es: "Sistema interno para la operación diaria de una empresa de logística, más el diseño de su marca y su landing.",
+      es: "Sistema interno para la operación diaria de una empresa de logística, junto con el diseño de su marca y su landing.",
       en: "Internal system for a logistics company's day-to-day operations, plus its brand design and landing page.",
     },
     stack: ["React", "Tailwind CSS", "MUI", "React Hook Form"],
@@ -168,8 +168,8 @@ export const clientProjects: Project[] = [
     slug: "corte-argentino",
     name: "Corte Argentino",
     summary: {
-      es: "Landing interactiva para una marca de carne premium, pensada para sus clientes internacionales, con mapa de sucursales.",
-      en: "Interactive landing page for a premium beef brand aimed at international customers, with a map of locations.",
+      es: "Landing interactiva para una marca de carne premium orientada al mercado internacional, con un mapa de puntos de venta.",
+      en: "Interactive landing page for a premium beef brand aimed at international buyers, with a map of points of sale.",
     },
     stack: ["React", "Vite", "Leaflet"],
     image: "/projects/corte-argentino-cover.webp",

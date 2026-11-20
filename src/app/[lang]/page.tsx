@@ -54,7 +54,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           <h2 id="projects-title" className="text-3xl font-extrabold tracking-[-0.04em] sm:text-4xl">
             {ui.selectedWork[lang]}
           </h2>
-          <p className="max-w-md text-[15px] text-muted text-pretty">{ui.clientWorkIntro[lang]}</p>
+          <p className="text-[15px] text-muted text-pretty">{ui.clientWorkIntro[lang]}</p>
         </div>
         <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-[18px] lg:grid-cols-12">
           {[studio, ...clientProjects].map((p, i) => (
@@ -68,16 +68,16 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         as="section"
         id="contact"
         aria-labelledby="contact-title"
-        className="glass-dark mt-10 flex flex-col gap-8 p-7 sm:mt-14 sm:p-10 lg:flex-row lg:items-center lg:justify-between lg:px-12 lg:py-14"
+        className="glass-dark mt-10 flex flex-col gap-8 p-7 sm:mt-14 sm:p-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:px-12 lg:py-14"
       >
-        <div>
+        <div className="min-w-0">
           <h2 id="contact-title" className="text-[clamp(1.9rem,5vw,2.75rem)] leading-tight font-extrabold tracking-[-0.04em] text-balance">
             {ui.hiringTitle[lang]}
           </h2>
           <p className="mt-3 max-w-xl text-[#a8a8a8] text-pretty sm:text-[17px]">{ui.hiringBody[lang]}</p>
           <p className="mt-4 font-mono text-sm text-accent-bright">{contact.email}</p>
         </div>
-        <div className="flex flex-wrap gap-2.5">
+        <div className="flex flex-wrap gap-2.5 lg:shrink-0 lg:flex-nowrap">
           <SoundLink href={`mailto:${contact.email}`} className="btn grow bg-[#f2f2f2] text-ink sm:grow-0">
             {ui.emailMe[lang]}
           </SoundLink>

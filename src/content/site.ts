@@ -17,8 +17,8 @@ export const ui = {
   readCase: { es: "Ver caso de estudio", en: "Read case study" },
   clientWork: { es: "Lengar Studio y clientes", en: "Lengar Studio & client work" },
   clientWorkIntro: {
-    es: "Sitios, sistemas y marcas que diseñé y desarrollé, la mayoría a través de Lengar Studio.",
-    en: "Websites, systems and brands I designed and built, most of them through Lengar Studio.",
+    es: "Sitios, sistemas y marcas que diseñé y desarrollé para clientes.",
+    en: "Websites, systems and brands I designed and built for clients.",
   },
   visit: { es: "Ver sitio", en: "Visit site" },
   code: { es: "Código", en: "Code" },
@@ -41,17 +41,18 @@ export const ui = {
   stack: { es: "Stack", en: "Stack" },
   switchTo: { es: "English", en: "Español" },
   skipToContent: { es: "Saltar al contenido", en: "Skip to content" },
-  hello: { es: "Hola, soy Edmundo — vivo en Buenos Aires, Argentina", en: "Hi, I'm Edmundo — based in Buenos Aires, Argentina" },
+  hello: { es: "Hola, soy Edmundo, desarrollador Full Stack.", en: "Hi, I'm Edmundo, a Full Stack Developer." },
   emailMe: { es: "Escribime", en: "Email me" },
   selectedWork: { es: "Trabajos seleccionados", en: "Selected work" },
   clients: { es: "Clientes", en: "Clients" },
   clientsTitle: { es: "Marcas para las que trabajé", en: "Brands I've built for" },
   clientsCount: { es: "clientes · web y marca", en: "clients · web & brand" },
+  tools: { es: "herramientas", en: "tools" },
   featuredLabel: { es: "Destacado · producto propio", en: "Featured · own product" },
-  hiringTitle: { es: "¿Contratando o con un proyecto en mente?", en: "Hiring, or have a project in mind?" },
+  hiringTitle: { es: "¿Tenés una posición abierta o un proyecto?", en: "Have an open role or a project in mind?" },
   hiringBody: {
-    es: "Vivo en Buenos Aires (GMT-3) y trabajo en remoto con equipos de Estados Unidos y Argentina.",
-    en: "Based in Buenos Aires (GMT-3), working remotely with teams in the US and Argentina.",
+    es: "Trabajo desde Buenos Aires (GMT-3), con horario compatible con equipos de América y Europa.",
+    en: "I work from Buenos Aires (GMT-3), with hours that overlap with teams in the Americas and Europe.",
   },
   soundOn: { es: "Silenciar sonidos", en: "Mute sounds" },
   soundOff: { es: "Activar sonidos", en: "Unmute sounds" },
@@ -65,16 +66,16 @@ export const ui = {
 export const profile = {
   name: "Edmundo Alvarez",
   role: {
-    es: "Desarrollador Full Stack & React Native",
-    en: "Full Stack & React Native Developer",
+    es: "Desarrollador Full Stack",
+    en: "Full Stack Developer",
   },
   headline: {
-    es: "Construyo productos web y mobile de punta a punta.",
-    en: "I build web and mobile products end to end.",
+    es: "Construyo productos web y mobile.",
+    en: "I build web and mobile products.",
   },
   summary: {
-    es: "Más de 3 años desarrollando con React Native, React, TypeScript, Node.js y Laravel. Fundé Lengar Studio, donde diseñé y desarrollé Valoo: una plataforma de propinas digitales publicada en App Store y Google Play. Vengo del diseño UX/UI y trabajé de forma remota con equipos de Estados Unidos y Argentina.",
-    en: "3+ years building with React Native, React, TypeScript, Node.js and Laravel. I founded Lengar Studio, where I designed and built Valoo, a digital tipping platform live on the App Store and Google Play. I have a UX/UI design background and experience working remotely with teams in the US and Argentina.",
+    es: "Hace más de 3 años que desarrollo con React, React Native, TypeScript, Node.js y Laravel. Fundé Lengar Studio, donde creé Valoo, una plataforma de propinas digitales disponible en App Store y Google Play. Vengo del diseño UX/UI, así que cuido tanto el código como la experiencia. Trabajé en remoto con equipos de Estados Unidos y Argentina.",
+    en: "I've been building with React, React Native, TypeScript, Node.js and Laravel for over 3 years. I founded Lengar Studio, where I created Valoo, a digital tipping platform available on the App Store and Google Play. My background in UX/UI design means I care about the code and the experience alike. I've worked remotely with teams in the US and Argentina.",
   },
   facts: [
     { es: "Buenos Aires, Argentina", en: "Buenos Aires, Argentina" },
@@ -85,16 +86,16 @@ export const profile = {
     { es: "Remoto o relocalización", en: "Remote or relocation" },
   ],
   metaDescription: {
-    es: "Desarrollador Full Stack y React Native en Buenos Aires. Fundador de Lengar Studio y creador de Valoo, publicada en App Store y Google Play. Disponible para remoto o UE.",
-    en: "Full Stack & React Native developer based in Buenos Aires. Founder of Lengar Studio and builder of Valoo, live on the App Store and Google Play. Open to remote or EU roles.",
+    es: "Desarrollador Full Stack en Buenos Aires, con foco en React, React Native y Laravel. Fundador de Lengar Studio y creador de Valoo. Disponible para remoto o relocalización a la UE.",
+    en: "Full Stack Developer based in Buenos Aires, focused on React, React Native and Laravel. Founder of Lengar Studio and creator of Valoo. Open to remote roles or relocating to the EU.",
   },
   availability: {
-    es: "Disponible para roles full-time · remoto o relocalización en la UE",
-    en: "Open to full-time roles · remote or EU relocation",
+    es: "Disponible para posiciones full-time, en remoto o con relocalización a la UE",
+    en: "Open to full-time roles, remote or relocating to the EU",
   },
   quickFacts: [
-    { label: { es: "Vivo en", en: "Based in" }, value: { es: "Buenos Aires", en: "Buenos Aires" } },
-    { label: { es: "Permiso", en: "Work auth" }, value: { es: "Ciudadano UE", en: "EU citizen" } },
+    { label: { es: "Ubicación", en: "Location" }, value: { es: "Buenos Aires", en: "Buenos Aires" } },
+    { label: { es: "Trabajo en la UE", en: "EU work permit" }, value: { es: "Ciudadano UE", en: "EU citizen" } },
     { label: { es: "Inglés", en: "English" }, value: { es: "B2 profesional", en: "B2 professional" } },
   ],
   cv: {
@@ -144,7 +145,7 @@ export const experience: Experience[] = [
   },
   {
     company: "RO Medical",
-    role: { es: "Full Stack Developer", en: "Full Stack Developer" },
+    role: { es: "Desarrollador Full Stack", en: "Full Stack Developer" },
     period: { es: "Oct 2024 – Sep 2025", en: "Oct 2024 – Sep 2025" },
     location: { es: "Híbrido · Buenos Aires", en: "Hybrid · Buenos Aires" },
     bullets: [
@@ -247,6 +248,6 @@ export const education: { title: L; school: string; year: L }[] = [
 ];
 
 export const spokenLanguages: L[] = [
-  { es: "Español — nativo", en: "Spanish — native" },
-  { es: "Inglés — B2, competencia profesional", en: "English — B2, professional proficiency" },
+  { es: "Español, nativo", en: "Spanish, native" },
+  { es: "Inglés, B2 (competencia profesional)", en: "English, B2 (professional proficiency)" },
 ];

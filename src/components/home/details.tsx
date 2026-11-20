@@ -100,7 +100,7 @@ export function StackCard({ lang }: { lang: Locale }) {
           {ui.skills[lang]}
         </h2>
         <p className="font-mono text-xs text-muted">
-          {skills.reduce((n, g) => n + g.items.length, 0)} tools
+          {skills.reduce((n, g) => n + g.items.length, 0)} {ui.tools[lang]}
         </p>
       </div>
       <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

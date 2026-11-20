@@ -1,60 +1,238 @@
 @import "tailwindcss";
 
-/* Tokens de color: rojo de marca del portfolio anterior (#f13c2f) sobre neutros. */
+/* Paleta "Frosted grid": blancos, grises y negro, con relieve por sombras. Un solo tema claro. */
 :root {
-  --bg: #fafaf9;
-  --surface: #ffffff;
-  --fg: #171923;
-  --muted: #5b5d6b;
-  --border: #e6e5e3;
-  --accent: #d93226;
-  --accent-fg: #ffffff;
-  --accent-soft: #fde8e6;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #111218;
-    --surface: #181a22;
-    --fg: #f1f1f1;
-    --muted: #9c9eab;
-    --border: #2a2c36;
-    --accent: #f5574b;
-    --accent-fg: #111218;
-    --accent-soft: #2e1a1c;
-  }
+  color-scheme: light;
+  --bg: #ededed;
+  --ink: #121212;
+  --body: #474747;
+  --muted: #5e5e5e;
+  --line: rgba(0, 0, 0, 0.08);
+  --glass: rgba(255, 255, 255, 0.62);
+  --glass-border: rgba(255, 255, 255, 0.95);
+  --shadow-card: inset 0 1px 0 #fff, 0 24px 48px -20px rgba(0, 0, 0, 0.18);
+  --shadow-card-hover: inset 0 1px 0 #fff, 0 34px 60px -22px rgba(0, 0, 0, 0.26);
+  --dark-grad: linear-gradient(145deg, #2e2e2e, #0e0e0e);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @theme inline {
   --color-bg: var(--bg);
-  --color-surface: var(--surface);
-  --color-fg: var(--fg);
+  --color-ink: var(--ink);
+  --color-body: var(--body);
   --color-muted: var(--muted);
-  --color-border: var(--border);
-  --color-accent: var(--accent);
-  --color-accent-fg: var(--accent-fg);
-  --color-accent-soft: var(--accent-soft);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-line: var(--line);
+  --font-sans: var(--font-manrope);
+  --font-mono: var(--font-plex-mono);
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 6rem;
 }
 
 body {
   background: var(--bg);
-  color: var(--fg);
+  color: var(--ink);
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--accent-fg);
+  background: var(--ink);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
+/* ---------- Superficies ---------- */
+
+@utility glass {
+  position: relative;
+  border-radius: 24px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-card);
+  @variant sm {
+    border-radius: 32px;
+  }
+}
+
+@utility glass-dark {
+  position: relative;
+  border-radius: 24px;
+  background: var(--dark-grad);
+  color: #f2f2f2;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 30px 60px -24px rgba(0, 0, 0, 0.5);
+  @variant sm {
+    border-radius: 32px;
+  }
+}
+
+/* Tarjeta interactiva: se eleva y aparece un brillo que sigue al puntero. */
+@utility lift {
+  transition:
+    transform 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out);
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.55), transparent 45%);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+    &:hover::after {
+      opacity: 1;
+    }
+  }
+}
+
+/* ---------- Piezas ---------- */
+
+@utility mono-label {
+  margin: 0;
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@utility chip {
+  display: inline-block;
+  padding: 7px 11px;
+  border-radius: 11px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 13px 22px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    box-shadow 0.3s var(--ease-out),
+    background-color 0.3s;
+}
+
+@utility btn-dark {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, #333, #0e0e0e);
+  color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 8px 18px rgba(0, 0, 0, 0.25);
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.22) 50%, transparent 70%);
+    transform: translateX(-120%);
+  }
+  @media (hover: hover) {
+    &:hover::before {
+      animation: shine 0.9s var(--ease-out);
+    }
+  }
+}
+
+@utility btn-light {
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+    }
+  }
+}
+
+@utility btn-ghost-dark {
+  border: 1px solid #444;
+  color: #f2f2f2;
+  @media (hover: hover) {
+    &:hover {
+      border-color: #888;
+    }
+  }
+}
+
+@keyframes shine {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px rgba(31, 168, 85, 0.18);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(31, 168, 85, 0.06);
+  }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+/* ---------- Línea de tiempo ---------- */
+
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 22px;
+  border-left: 1px solid #d6d6d6;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.timeline > li {
+  position: relative;
+}
+.timeline > li::before {
+  content: "";
+  position: absolute;
+  left: -28px;
+  top: 6px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #bdbdbd;
+  box-shadow: 0 0 0 4px #f4f4f4;
+}
+.timeline > li[data-current]::before {
+  background: var(--ink);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
   }
 }

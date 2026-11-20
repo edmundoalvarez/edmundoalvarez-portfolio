@@ -1,13 +1,17 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { IBM_Plex_Mono, Manrope } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, locales, SITE_URL } from "@/i18n";
 import { profile } from "@/content/site";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
+import { Backdrop } from "@/components/backdrop";
+import { Providers } from "@/components/motion/motion-root";
 import "../globals.css";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
+const plexMono = IBM_Plex_Mono({ variable: "--font-plex-mono", subsets: ["latin"], weight: ["400", "500"] });
+
+export const viewport: Viewport = { themeColor: "#ededed", colorScheme: "light" };
 
 export const dynamicParams = false;
 
@@ -48,13 +52,16 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   if (!hasLocale(lang)) notFound();
 
   return (
-    <html lang={lang} className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-      <body className="flex min-h-dvh flex-col font-sans">
-        <SiteHeader lang={lang} />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <SiteFooter lang={lang} />
+    <html lang={lang} className={`${manrope.variable} ${plexMono.variable} antialiased`}>
+      <body className="relative isolate flex min-h-dvh flex-col overflow-x-clip font-sans">
+        <Providers>
+          <Backdrop />
+          <SiteHeader lang={lang} />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <SiteFooter lang={lang} />
+        </Providers>
       </body>
     </html>
   );

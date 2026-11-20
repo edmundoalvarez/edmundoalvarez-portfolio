@@ -2,92 +2,93 @@ import Image from "next/image";
 import type { Locale } from "@/i18n";
 import type { Project } from "@/content/projects";
 import { ui } from "@/content/site";
-import { ExternalLink, TagList } from "./ui";
+import { Card } from "./motion/reveal";
+import { SoundLink } from "./sound/sound-link";
+import { ArrowIcon } from "./ui";
 
+/** Tarjeta de proyecto. Si tiene URL, toda la tarjeta es clickeable (enlace estirado sobre el título). */
 export function ProjectCard({
   project,
   lang,
+  index = 0,
   wide = false,
 }: {
   project: Project;
   lang: Locale;
+  index?: number;
   wide?: boolean;
 }) {
   return (
-    <article
-      className={`group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface ${
-        wide ? "sm:col-span-2 md:grid md:grid-cols-[3fr_2fr]" : ""
-      }`}
+    <Card
+      as="article"
+      index={index}
+      interactive
+      className={`glass group flex flex-col p-2.5 sm:p-3 ${wide ? "sm:col-span-2 lg:col-span-8 lg:grid lg:grid-cols-[1.35fr_1fr] lg:gap-2" : "lg:col-span-4"}`}
     >
-      <div
-        className={`relative overflow-hidden border-border bg-bg ${
-          wide ? "aspect-[40/21] self-start border-b md:border-r md:border-b-0" : "aspect-[16/10] border-b"
-        }`}
-      >
+      <div className={`relative overflow-hidden rounded-[18px] bg-[#e4e4e4] sm:rounded-[22px] ${wide ? "aspect-[40/21] lg:self-start" : "aspect-[16/10]"}`}>
         <Image
           src={project.image}
           alt={project.imageAlt[lang]}
           fill
-          sizes={wide ? "(min-width: 1024px) 600px, 100vw" : "(min-width: 1024px) 480px, (min-width: 640px) 50vw, 100vw"}
-          className={`object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none ${
+          sizes={wide ? "(min-width: 1024px) 720px, (min-width: 640px) 90vw, 100vw" : "(min-width: 1024px) 420px, (min-width: 640px) 45vw, 100vw"}
+          className={`object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04] ${
             project.imagePosition === "center" ? "object-center" : "object-top"
           }`}
         />
       </div>
-      <div className="flex flex-1 flex-col gap-4 p-5 sm:p-6">
-        <div>
-          <h3 className="text-lg font-semibold">
-            {project.name}
-            {project.client && (
-              <span className="font-normal text-muted"> · {project.client}</span>
+      <div className={`flex flex-1 flex-col gap-2.5 px-3 pt-4 pb-3 ${wide ? "lg:justify-center lg:px-6" : ""}`}>
+        <div className="flex items-baseline justify-between gap-3">
+          <h3 className="text-[19px] font-bold tracking-tight">
+            {project.url ? (
+              <SoundLink href={project.url} className="before:absolute before:inset-0 before:z-10 before:rounded-[inherit]">
+                {project.name}
+              </SoundLink>
+            ) : (
+              project.name
             )}
           </h3>
-          <p className="mt-1.5 text-sm text-muted text-pretty">{project.summary[lang]}</p>
+          {project.url && (
+            <span className="flex shrink-0 items-center gap-1 text-[13px] font-semibold text-muted transition-colors group-hover:text-ink">
+              {ui.openSite[lang]}
+              <ArrowIcon className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </span>
+          )}
         </div>
-        <TagList items={project.stack} />
-        {(project.url || project.repo) && (
-          <div className="mt-auto flex gap-5 pt-1">
-            {project.url && (
-              <ExternalLink href={project.url}>
-                {ui.visit[lang]}
-                <span className="sr-only">: {project.name}</span>
-              </ExternalLink>
-            )}
-            {project.repo && (
-              <ExternalLink href={project.repo}>
-                {ui.code[lang]}
-                <span className="sr-only">: {project.name}</span>
-              </ExternalLink>
-            )}
-          </div>
-        )}
+        {project.client && <p className="-mt-1.5 text-[13px] text-muted">{project.client}</p>}
+        <p className={`text-[15px] leading-relaxed text-body text-pretty ${wide ? "" : "line-clamp-3"}`}>{project.summary[lang]}</p>
+        <p className="mt-auto pt-1 font-mono text-xs text-muted">{project.stack.join(" · ")}</p>
       </div>
-    </article>
+    </Card>
   );
 }
 
-export function ArchiveRow({ project, lang }: { project: Project; lang: Locale }) {
+/** Proyectos de los primeros años: lista compacta dentro de una tarjeta. */
+export function ArchiveCard({ projects, lang }: { projects: Project[]; lang: Locale }) {
   return (
-    <li className="grid gap-2 border-t border-border py-4 sm:grid-cols-[12rem_1fr_auto] sm:items-baseline sm:gap-6">
-      <span className="font-medium">{project.name}</span>
-      <div className="space-y-2">
-        <p className="text-sm text-muted">{project.summary[lang]}</p>
-        <p className="font-mono text-xs text-muted">{project.stack.join(" · ")}</p>
-      </div>
-      <div className="flex gap-4">
-        {project.url && (
-          <ExternalLink href={project.url}>
-            {ui.visit[lang]}
-            <span className="sr-only">: {project.name}</span>
-          </ExternalLink>
-        )}
-        {project.repo && (
-          <ExternalLink href={project.repo}>
-            {ui.code[lang]}
-            <span className="sr-only">: {project.name}</span>
-          </ExternalLink>
-        )}
-      </div>
-    </li>
+    <Card as="section" aria-labelledby="archive-title" index={2} className="glass flex flex-col p-6 sm:col-span-2 sm:p-8 lg:col-span-4">
+      <h3 id="archive-title" className="mono-label">
+        {ui.archive[lang]}
+      </h3>
+      <p className="mt-2 text-sm text-muted text-pretty">{ui.archiveIntro[lang]}</p>
+      <ul className="mt-5 divide-y divide-black/[0.07]">
+        {projects.map((p) => (
+          <li key={p.slug} className="flex items-baseline justify-between gap-4 py-2.5">
+            <span className="font-semibold">{p.name}</span>
+            <span className="flex shrink-0 gap-3 text-[13px] font-semibold text-muted">
+              {p.url && (
+                <SoundLink href={p.url} className="hover:text-ink">
+                  {ui.visit[lang]} <span className="sr-only">: {p.name}</span>↗
+                </SoundLink>
+              )}
+              {p.repo && (
+                <SoundLink href={p.repo} className="hover:text-ink">
+                  {ui.code[lang]} <span className="sr-only">: {p.name}</span>↗
+                </SoundLink>
+              )}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </Card>
   );
 }

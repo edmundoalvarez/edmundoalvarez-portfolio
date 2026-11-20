@@ -1,27 +1,18 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { defaultLocale, hasLocale, locales, type Locale } from "./i18n";
 
-function preferredLocale(request: NextRequest): Locale {
-  const header = request.headers.get("accept-language") ?? "";
-  const ranked = header
-    .split(",")
-    .map((part) => {
-      const [tag, q] = part.trim().split(";q=");
-      return { lang: tag.slice(0, 2).toLowerCase(), q: q ? Number(q) : 1 };
-    })
-    .sort((a, b) => b.q - a.q);
-  const match = ranked.find((r) => hasLocale(r.lang));
-  return match ? (match.lang as Locale) : defaultLocale;
+/** Inglés por defecto. Solo se usa otro idioma si el visitante lo eligió antes (cookie del selector). */
+function chosenLocale(request: NextRequest): Locale {
+  const saved = request.cookies.get("NEXT_LOCALE")?.value;
+  return saved && hasLocale(saved) ? saved : defaultLocale;
 }
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const hasPrefix = locales.some(
-    (l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`),
-  );
+  const hasPrefix = locales.some((l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`));
   if (hasPrefix) return;
 
-  request.nextUrl.pathname = `/${preferredLocale(request)}${pathname === "/" ? "" : pathname}`;
+  request.nextUrl.pathname = `/${chosenLocale(request)}${pathname === "/" ? "" : pathname}`;
   return NextResponse.redirect(request.nextUrl);
 }
 

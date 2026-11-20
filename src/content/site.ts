@@ -8,7 +8,7 @@ export const ui = {
   nav: {
     work: { es: "Proyectos", en: "Work" },
     experience: { es: "Experiencia", en: "Experience" },
-    skills: { es: "Skills", en: "Skills" },
+    skills: { es: "Stack", en: "Stack" },
     contact: { es: "Contacto", en: "Contact" },
   },
   downloadCv: { es: "Descargar CV", en: "Download CV" },
@@ -46,6 +46,19 @@ export const ui = {
   stack: { es: "Stack", en: "Stack" },
   switchTo: { es: "English", en: "Español" },
   skipToContent: { es: "Saltar al contenido", en: "Skip to content" },
+  hello: { es: "Hola, soy Edmundo — vivo en Buenos Aires, Argentina", en: "Hi, I'm Edmundo — based in Buenos Aires, Argentina" },
+  emailMe: { es: "Escribime", en: "Email me" },
+  selectedWork: { es: "Trabajos seleccionados", en: "Selected work" },
+  clients: { es: "Clientes", en: "Clients" },
+  featuredLabel: { es: "Destacado · producto propio", en: "Featured · own product" },
+  hiringTitle: { es: "¿Contratando o con un proyecto en mente?", en: "Hiring, or have a project in mind?" },
+  hiringBody: {
+    es: "Vivo en Buenos Aires (GMT-3) y trabajo en remoto con equipos de Estados Unidos y Argentina.",
+    en: "Based in Buenos Aires (GMT-3), working remotely with teams in the US and Argentina.",
+  },
+  soundOn: { es: "Silenciar sonidos", en: "Mute sounds" },
+  soundOff: { es: "Activar sonidos", en: "Unmute sounds" },
+  openSite: { es: "Abrir sitio", en: "Open site" },
 } satisfies Record<string, L | Record<string, L>>;
 
 /* ------------------------------------------------------------------ */
@@ -73,6 +86,15 @@ export const profile = {
       en: "Spanish citizen: EU work authorization",
     },
     { es: "Remoto o relocalización", en: "Remote or relocation" },
+  ],
+  availability: {
+    es: "Disponible para roles full-time · remoto o relocalización en la UE",
+    en: "Open to full-time roles · remote or EU relocation",
+  },
+  quickFacts: [
+    { label: { es: "Vivo en", en: "Based in" }, value: { es: "Buenos Aires", en: "Buenos Aires" } },
+    { label: { es: "Permiso", en: "Work auth" }, value: { es: "Ciudadano UE", en: "EU citizen" } },
+    { label: { es: "Inglés", en: "English" }, value: { es: "B2 profesional", en: "B2 professional" } },
   ],
   cv: {
     es: "/cv/edmundo-alvarez-cv-es.pdf",
@@ -147,8 +169,8 @@ export const experience: Experience[] = [
     location: { es: "Remoto", en: "Remote" },
     bullets: [
       {
-        es: "Sitios web, e-commerce, sistemas administrativos y plataformas de eventos para Corte Argentino, Logistran, Parrillas Pigüé, Naistat y Tekun Agropecuaria.",
-        en: "Websites, e-commerce, admin systems and event platforms for Corte Argentino, Logistran, Parrillas Pigüé, Naistat and Tekun Agropecuaria.",
+        es: "Sitios web, e-commerce, sistemas administrativos y plataformas de eventos para Corte Argentino, Logistran, Naistat y Tekun Agropecuaria.",
+        en: "Websites, e-commerce, admin systems and event platforms for Corte Argentino, Logistran, Naistat and Tekun Agropecuaria.",
       },
       {
         es: "Diseño responsivo, SEO, testing automatizado (PHPUnit), branding y piezas gráficas.",

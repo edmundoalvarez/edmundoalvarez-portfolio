@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { hasLocale } from "@/i18n";
 import { valoo, type CaseStudy } from "@/content/projects";
 import { ui } from "@/content/site";
-import { ExternalLink, TagList } from "@/components/ui";
+import { Card } from "@/components/motion/reveal";
+import { SoundLink } from "@/components/sound/sound-link";
 
 const caseStudies: Record<string, CaseStudy> = { [valoo.slug]: valoo };
 
@@ -43,68 +43,74 @@ export default async function CaseStudyPage({ params }: PageProps<"/[lang]/proje
   ];
 
   return (
-    <article className="mx-auto max-w-3xl px-4 pt-12 pb-24 sm:px-6">
-      <Link href={`/${lang}#work`} className="text-sm text-muted hover:text-fg">
-        ← {ui.back[lang]}
-      </Link>
+    <article className="mx-auto flex w-full max-w-[1328px] flex-col gap-3.5 px-4 pt-4 pb-6 sm:gap-[18px] sm:px-6 sm:pt-6 lg:px-14">
+      <SoundLink internal href={`/${lang}#work`} className="btn btn-light self-start">
+        <span aria-hidden>←</span> {ui.back[lang]}
+      </SoundLink>
 
-      <header className="mt-8">
-        <div className="flex items-center justify-center rounded-3xl bg-[#063634] px-8 py-16">
-          <Image src="/projects/logo-valoo.svg" alt={study.name} width={1062} height={325} priority className="h-auto w-64" />
-        </div>
-        <h1 className="mt-10 text-4xl font-semibold tracking-tight sm:text-5xl">{study.name}</h1>
-        <p className="mt-4 text-lg text-muted text-pretty">{study.summary[lang]}</p>
-
-        <dl className="mt-8 grid gap-4 border-y border-border py-6 text-sm sm:grid-cols-3">
-          {facts.map((f) => (
-            <div key={f.label}>
-              <dt className="text-muted">{f.label}</dt>
-              <dd className="mt-0.5 font-medium">{f.value}</dd>
-            </div>
-          ))}
-        </dl>
-
-        <div className="mt-6">
-          <p className="mb-3 text-sm text-muted">{ui.stack[lang]}</p>
-          <TagList items={study.stack} />
-        </div>
-
-        {study.links.length > 0 && (
-          <div className="mt-6 flex flex-wrap gap-5">
-            {study.links.map((link) => (
-              <ExternalLink key={link.href} href={link.href}>
-                {link.label[lang]}
-              </ExternalLink>
-            ))}
+      <div className="grid gap-3.5 sm:gap-[18px] lg:grid-cols-12">
+        <Card immediate className="glass flex flex-col gap-7 p-6 sm:p-10 lg:col-span-7 lg:p-12">
+          <div className="flex size-16 items-center justify-center rounded-2xl bg-[#063634] p-3 shadow-[0_10px_24px_-8px_rgba(0,0,0,0.35)]">
+            <Image src="/projects/icon-valoo.png" alt="" width={64} height={64} className="size-full object-contain" />
           </div>
-        )}
-      </header>
-
-      <figure className="mt-12">
-        <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-border bg-[#111312]">
-          <Image
-            src="/projects/valoo-desktop.webp"
-            alt={lang === "es" ? "Home del sitio valoo.la" : "valoo.la home page"}
-            fill
-            sizes="(min-width: 768px) 720px, 100vw"
-            className="object-cover object-top"
-          />
-        </div>
-        <figcaption className="mt-3 text-sm text-muted">valoo.la</figcaption>
-      </figure>
-
-      <div className="mt-14 space-y-12">
-        {study.sections.map((section) => (
-          <section key={section.title.en}>
-            <h2 className="text-2xl font-semibold tracking-tight">{section.title[lang]}</h2>
-            <div className="mt-4 space-y-4 text-muted">
-              {section.body.map((p) => (
-                <p key={p.en} className="text-pretty leading-relaxed">
-                  {p[lang]}
-                </p>
+          <div>
+            <p className="mono-label">{study.client}</p>
+            <h1 className="mt-2 text-[clamp(2.75rem,8vw,4.5rem)] leading-none font-extrabold tracking-[-0.045em]">{study.name}</h1>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-body text-pretty">{study.summary[lang]}</p>
+          </div>
+          <dl className="grid gap-3 sm:grid-cols-3">
+            {facts.map((f) => (
+              <div key={f.label} className="rounded-2xl bg-white px-4 py-3.5 shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+                <dt className="mono-label text-[11px]!">{f.label}</dt>
+                <dd className="mt-1 text-[15px] leading-snug font-bold">{f.value}</dd>
+              </div>
+            ))}
+          </dl>
+          <div>
+            <p className="mono-label mb-3">{ui.stack[lang]}</p>
+            <ul className="flex flex-wrap gap-1.5">
+              {study.stack.map((s) => (
+                <li key={s} className="chip">{s}</li>
+              ))}
+            </ul>
+          </div>
+          {study.links.length > 0 && (
+            <div className="flex flex-wrap gap-2.5">
+              {study.links.map((link, i) => (
+                <SoundLink key={link.href} href={link.href} className={`btn ${i === 0 ? "btn-dark" : "btn-light"}`}>
+                  {link.label[lang]} <span aria-hidden>↗</span>
+                </SoundLink>
               ))}
             </div>
-          </section>
+          )}
+        </Card>
+
+        <Card immediate index={1} interactive className="glass p-2.5 sm:p-3 lg:col-span-5">
+          <figure className="relative h-[420px] overflow-hidden rounded-[18px] bg-[#111312] sm:h-[560px] sm:rounded-[24px] lg:h-full lg:min-h-[640px]">
+            <Image
+              src="/projects/valoo-desktop.webp"
+              alt={lang === "es" ? "Home del sitio valoo.la" : "valoo.la home page"}
+              fill
+              priority
+              sizes="(min-width: 1024px) 520px, 100vw"
+              className="object-cover object-top"
+            />
+            <figcaption className="absolute bottom-3 left-3 rounded-full bg-white/85 px-3 py-1.5 font-mono text-xs backdrop-blur">valoo.la</figcaption>
+          </figure>
+        </Card>
+      </div>
+
+      <div className="grid gap-3.5 sm:gap-[18px] lg:grid-cols-2">
+        {study.sections.map((section, i) => (
+          <Card key={section.title.en} as="section" index={i % 2} className="glass p-6 sm:p-9">
+            <p className="mono-label">{String(i + 1).padStart(2, "0")}</p>
+            <h2 className="mt-2 text-2xl font-extrabold tracking-[-0.03em]">{section.title[lang]}</h2>
+            <div className="mt-4 space-y-4 leading-relaxed text-body">
+              {section.body.map((p) => (
+                <p key={p.en} className="text-pretty">{p[lang]}</p>
+              ))}
+            </div>
+          </Card>
         ))}
       </div>
     </article>

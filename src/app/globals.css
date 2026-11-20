@@ -13,6 +13,9 @@
   --shadow-card: inset 0 1px 0 #fff, 0 24px 48px -20px rgba(0, 0, 0, 0.18);
   --shadow-card-hover: inset 0 1px 0 #fff, 0 34px 60px -22px rgba(0, 0, 0, 0.26);
   --dark-grad: linear-gradient(145deg, #2e2e2e, #0e0e0e);
+  /* Acento: el rojo anaranjado del portfolio anterior, ajustado para contraste AA. */
+  --accent: #cf2d21;
+  --accent-bright: #ff6450; /* sobre fondos oscuros */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -22,6 +25,8 @@
   --color-body: var(--body);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-bright: var(--accent-bright);
   --font-sans: var(--font-manrope);
   --font-mono: var(--font-plex-mono);
 }
@@ -71,28 +76,17 @@ body {
   }
 }
 
-/* Tarjeta interactiva: se eleva y aparece un brillo que sigue al puntero. */
+/* Tarjeta interactiva: el contenedor se eleva y crece apenas, con sombra más profunda. */
 @utility lift {
   transition:
-    transform 0.4s var(--ease-out),
-    box-shadow 0.4s var(--ease-out);
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s;
-    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.55), transparent 45%);
-  }
+    transform 0.5s var(--ease-out),
+    box-shadow 0.5s var(--ease-out),
+    border-color 0.5s;
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      transform: translateY(-4px);
+      transform: translateY(-6px) scale(1.012);
       box-shadow: var(--shadow-card-hover);
-    }
-    &:hover::after {
-      opacity: 1;
+      border-color: #fff;
     }
   }
 }
@@ -110,13 +104,32 @@ body {
 
 @utility chip {
   display: inline-block;
-  padding: 7px 11px;
-  border-radius: 11px;
+  padding: 7px 13px;
+  border-radius: 999px;
   background: #fff;
+  border: 1px solid transparent;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
   font-size: 14px;
   font-weight: 600;
   line-height: 1.2;
+  transition:
+    transform 0.25s var(--ease-out),
+    box-shadow 0.25s var(--ease-out),
+    color 0.2s,
+    border-color 0.2s;
+}
+
+/* Chip con hover (stack). */
+@utility chip-hover {
+  cursor: default;
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-2px);
+      color: var(--accent);
+      border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+      box-shadow: 0 8px 16px -6px color-mix(in srgb, var(--accent) 40%, transparent);
+    }
+  }
 }
 
 @utility btn {
@@ -149,6 +162,29 @@ body {
     transform: translateX(-120%);
   }
   @media (hover: hover) {
+    &:hover::before {
+      animation: shine 0.9s var(--ease-out);
+    }
+  }
+}
+
+@utility btn-accent {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, #e0402f, #b8251a);
+  color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 10px 22px -6px rgba(207, 45, 33, 0.55);
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+    transform: translateX(-120%);
+  }
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 14px 28px -6px rgba(207, 45, 33, 0.65);
+    }
     &:hover::before {
       animation: shine 0.9s var(--ease-out);
     }
@@ -222,7 +258,30 @@ body {
   box-shadow: 0 0 0 4px #f4f4f4;
 }
 .timeline > li[data-current]::before {
-  background: var(--ink);
+  background: var(--accent);
+  box-shadow:
+    0 0 0 4px #f4f4f4,
+    0 0 0 7px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+/* ---------- Franja de logos (marquee) ---------- */
+
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -234,5 +293,17 @@ body {
   *::after {
     animation: none !important;
     transition-duration: 0.01ms !important;
+  }
+  /* Sin animación: los logos se muestran todos, en filas centradas. */
+  .marquee {
+    mask-image: none;
+  }
+  .marquee-track {
+    width: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .marquee-track [data-clone] {
+    display: none;
   }
 }

@@ -117,8 +117,8 @@ export const studio: Project = {
     en: "My studio's website: GSAP and Lenis animations, a contact form with Resend and Turnstile, and a private quoting panel that generates PDF estimates.",
   },
   stack: ["Next.js", "TypeScript", "GSAP", "Lenis", "Resend", "React PDF"],
-  image: "/projects/lengar-og.png",
-  imageAlt: { es: "Portada de Lengar Studio", en: "Lengar Studio cover" },
+  image: "/projects/lengar-home.jpg",
+  imageAlt: { es: "Home del sitio lengarstudio.com", en: "lengarstudio.com home page" },
   imagePosition: "center",
   url: "https://lengarstudio.com",
 };
@@ -188,114 +188,5 @@ export const clientProjects: Project[] = [
     image: "/projects/malevo-cover.webp",
     imageAlt: { es: "Latas de cerveza Malevo con las etiquetas diseñadas", en: "Malevo beer cans with the label design" },
     imagePosition: "center",
-  },
-  {
-    slug: "quince-de-sol",
-    name: "Quince de Sol",
-    summary: {
-      es: "Sitio de evento donde los invitados confirman su asistencia, con backend y base de datos propios.",
-      en: "Event website where guests RSVP, with its own backend and database.",
-    },
-    stack: ["React", "Node.js", "MongoDB"],
-    image: "/projects/quincedesol.jpg",
-    imageAlt: { es: "Home del sitio Quince de Sol", en: "Quince de Sol home page" },
-    imagePosition: "center",
-    url: "https://quincedesol.com/",
-  },
-];
-
-/* ------------------------------------------------------------------ */
-/* Archivo                                                             */
-/* ------------------------------------------------------------------ */
-
-export const archiveProjects: Project[] = [
-  {
-    slug: "keepmoving",
-    name: "Keepmoving",
-    summary: {
-      es: "E-commerce con panel de administración y base de datos relacional.",
-      en: "E-commerce with an admin panel and a relational database.",
-    },
-    stack: ["Laravel", "Blade", "MySQL"],
-    image: "/projects/keepmoving.png",
-    imageAlt: { es: "Home de Keepmoving", en: "Keepmoving home page" },
-    url: "https://keepmoving.edmundoalvarez.com.ar",
-    repo: "https://github.com/edmundoalvarez/keepmoving",
-  },
-  {
-    slug: "game-votes-awards",
-    name: "Game Votes Awards",
-    summary: {
-      es: "Sistema de votación de juegos con panel de administración, jueces y API propia.",
-      en: "Game voting system with an admin panel, judges and its own API.",
-    },
-    stack: ["React", "Node.js", "MongoDB"],
-    image: "/projects/react-app-01.png",
-    imageAlt: { es: "Home de Game Votes Awards", en: "Game Votes Awards home page" },
-    url: "https://react-proyect-01-app.vercel.app/",
-    repo: "https://github.com/edmundoalvarez/react-proyect-01-app",
-  },
-  {
-    slug: "caar",
-    name: "C.A.A.R.",
-    summary: {
-      es: "Sitio institucional para la Cámara Argentina de Autos de Remise.",
-      en: "Website for the Argentine chamber of private car services (C.A.A.R.).",
-    },
-    stack: ["React", "Node.js", "MongoDB"],
-    image: "/projects/caar.jpg",
-    imageAlt: { es: "Logo de C.A.A.R.", en: "C.A.A.R. logo" },
-    url: "https://caar-page.vercel.app/",
-  },
-  {
-    slug: "atar",
-    name: "A.T.A.R.",
-    summary: {
-      es: "Sitio institucional para la Asociación de Titulares de Autos de Remise.",
-      en: "Website for the association of private car service owners (A.T.A.R.).",
-    },
-    stack: ["React", "Node.js"],
-    image: "/projects/atar.jpg",
-    imageAlt: { es: "Logo de A.T.A.R.", en: "A.T.A.R. logo" },
-    url: "https://atar-page.vercel.app/",
-  },
-  {
-    slug: "mango",
-    name: "Mango",
-    summary: {
-      es: "Sitio para un estudio de diseño digital, con datos en Firebase.",
-      en: "Website for a digital design studio, with data on Firebase.",
-    },
-    stack: ["Vue.js", "Firebase"],
-    image: "/projects/mango.png",
-    imageAlt: { es: "Sección Quiénes Somos de Mango", en: "Mango About page" },
-    url: "https://mango-project-indol.vercel.app/",
-    repo: "https://github.com/edmundoalvarez/mango-project",
-  },
-  {
-    slug: "sabes-la-bandera",
-    name: "¿Sabés la bandera?",
-    summary: {
-      es: "Juego de trivia de banderas como Progressive Web App instalable.",
-      en: "Flag trivia game built as an installable Progressive Web App.",
-    },
-    stack: ["JavaScript", "PWA", "Bootstrap"],
-    image: "/projects/sabes-la-bandera.png",
-    imageAlt: { es: "Primer nivel del juego", en: "First level of the game" },
-    url: "https://sabes-la-bandera.vercel.app/",
-    repo: "https://github.com/edmundoalvarez/sabes-la-bandera",
-  },
-  {
-    slug: "bucks",
-    name: "Bucks E-commerce",
-    summary: {
-      es: "E-commerce en JavaScript puro, sin frameworks.",
-      en: "E-commerce built with vanilla JavaScript, no frameworks.",
-    },
-    stack: ["JavaScript", "HTML & CSS"],
-    image: "/projects/e-commerce-js.png",
-    imageAlt: { es: "Home de Bucks", en: "Bucks home page" },
-    url: "https://bucks-ecommerce.vercel.app/",
-    repo: "https://github.com/edmundoalvarez/bucks-ecommerce",
   },
 ];

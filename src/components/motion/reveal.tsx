@@ -1,7 +1,7 @@
 "use client";
 
 import { m, useReducedMotion } from "motion/react";
-import { useCallback, type ElementType, type ReactNode } from "react";
+import type { ElementType, ReactNode } from "react";
 import { useSound } from "@/components/sound/sound-provider";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -13,7 +13,7 @@ type Props = {
   index?: number;
   /** Aparece al cargar (hero) en vez de al entrar en pantalla. */
   immediate?: boolean;
-  /** Tarjeta interactiva: elevación + brillo que sigue al puntero + sonido. */
+  /** Tarjeta interactiva: el contenedor se eleva al hacer hover + sonido. */
   interactive?: boolean;
   className?: string;
   id?: string;
@@ -27,11 +27,6 @@ export function Card({ as = "div", index = 0, immediate = false, interactive = f
   const { playHover } = useSound();
   const Tag = tags[as] as ElementType;
 
-  const onMove = useCallback((e: React.PointerEvent<HTMLElement>) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
-  }, []);
 
   const hidden = reduce ? { opacity: 0 } : { opacity: 0, y: 24, filter: "blur(6px)" };
   const shown = reduce ? { opacity: 1 } : { opacity: 1, y: 0, filter: "blur(0px)" };
@@ -43,7 +38,7 @@ export function Card({ as = "div", index = 0, immediate = false, interactive = f
       {...(immediate ? { animate: shown } : { whileInView: shown, viewport: { once: true, amount: 0.15 } })}
       transition={transition}
       className={`${interactive ? "lift" : ""} ${className}`}
-      {...(interactive ? { onPointerMove: onMove, onPointerEnter: playHover } : {})}
+      {...(interactive ? { onPointerEnter: playHover } : {})}
       {...rest}
     >
       {children}

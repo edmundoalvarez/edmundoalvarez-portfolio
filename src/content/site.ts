@@ -20,11 +20,6 @@ export const ui = {
     es: "Sitios, sistemas y marcas que diseñé y desarrollé, la mayoría a través de Lengar Studio.",
     en: "Websites, systems and brands I designed and built, most of them through Lengar Studio.",
   },
-  archive: { es: "Proyectos anteriores", en: "Earlier projects" },
-  archiveIntro: {
-    es: "Proyectos académicos y personales de mis primeros años como desarrollador.",
-    en: "Academic and personal projects from my early years as a developer.",
-  },
   visit: { es: "Ver sitio", en: "Visit site" },
   code: { es: "Código", en: "Code" },
   experience: { es: "Experiencia", en: "Experience" },

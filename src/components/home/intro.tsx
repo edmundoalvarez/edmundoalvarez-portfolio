@@ -18,14 +18,14 @@ export function HeroCard({ lang }: { lang: Locale }) {
         {profile.availability[lang]}
       </p>
       <div>
-        <p className="mb-3 font-mono text-[13px] text-muted sm:mb-4 sm:text-sm">{ui.hello[lang]}</p>
+        <p className="mb-3 font-mono text-[13px] font-medium text-accent sm:mb-4 sm:text-sm">{ui.hello[lang]}</p>
         <h1 className="text-[clamp(2.4rem,7.5vw,4.25rem)] leading-[1.02] font-extrabold tracking-[-0.045em] text-balance">
           {profile.role[lang]}.
         </h1>
       </div>
       <p className="max-w-[640px] text-base leading-relaxed text-body text-pretty sm:text-lg">{profile.summary[lang]}</p>
       <div className="flex flex-wrap gap-2.5">
-        <SoundLink href={profile.cv[lang]} download className="btn btn-dark grow sm:grow-0">
+        <SoundLink href={profile.cv[lang]} download className="btn btn-accent grow sm:grow-0">
           {ui.downloadCv[lang]} <span aria-hidden>↓</span>
         </SoundLink>
         <SoundLink href={contact.linkedin} className="btn btn-light grow sm:grow-0">

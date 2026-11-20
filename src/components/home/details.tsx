@@ -93,18 +93,26 @@ export function StackCard({ lang }: { lang: Locale }) {
       as="section"
       id="stack"
       aria-labelledby="stack-title"
-      className="glass p-6 sm:order-5 sm:col-span-6 sm:p-8 lg:order-none lg:col-span-7"
+      className="glass p-6 sm:order-5 sm:col-span-6 sm:p-8 lg:order-none lg:col-span-12 lg:p-10"
     >
-      <h2 id="stack-title" className="mono-label mb-6">
-        {ui.skills[lang]}
-      </h2>
-      <dl className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-        {skills.map((group) => (
-          <div key={group.group.en}>
-            <dt className="mb-2.5 text-[13px] font-bold text-muted">{group.group[lang]}</dt>
+      <div className="mb-6 flex items-baseline justify-between gap-4">
+        <h2 id="stack-title" className="mono-label">
+          {ui.skills[lang]}
+        </h2>
+        <p className="font-mono text-xs text-muted">
+          {skills.reduce((n, g) => n + g.items.length, 0)} tools
+        </p>
+      </div>
+      <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {skills.map((group, i) => (
+          <div key={group.group.en} className="rounded-[22px] bg-white/45 p-5 shadow-[inset_0_1px_0_#fff] ring-1 ring-black/[0.04]">
+            <dt className="mb-3.5 flex items-center justify-between">
+              <span className="text-[15px] font-bold">{group.group[lang]}</span>
+              <span className="font-mono text-[11px] text-muted">{String(i + 1).padStart(2, "0")}</span>
+            </dt>
             <dd className="flex flex-wrap gap-1.5">
               {group.items.map((item) => (
-                <span key={item} className="chip text-[13px]!">
+                <span key={item} className="chip chip-hover text-[13px]!">
                   {item}
                 </span>
               ))}
@@ -116,25 +124,41 @@ export function StackCard({ lang }: { lang: Locale }) {
   );
 }
 
+function LogoRow({ clone = false }: { clone?: boolean }) {
+  return (
+    <ul className="flex shrink-0 items-center gap-14 pr-14 sm:gap-20 sm:pr-20" {...(clone ? { "aria-hidden": true, "data-clone": "" } : {})}>
+      {clients.map((c) => (
+        <li key={c.name} className="flex h-16 shrink-0 items-center">
+          {/* eslint-disable-next-line @next/next/no-img-element -- SVG livianos, no necesitan optimización */}
+          <img
+            src={c.logo}
+            alt={clone ? "" : c.name}
+            style={{ height: Math.round(c.h * 1.25) }}
+            className="w-auto opacity-80 transition-opacity duration-300 hover:opacity-100"
+            loading="lazy"
+          />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function ClientsCard({ lang }: { lang: Locale }) {
   return (
     <Card
       as="section"
       aria-labelledby="clients-title"
-      index={1}
-      className="glass flex flex-col gap-6 p-6 sm:order-6 sm:col-span-6 sm:p-8 lg:order-none lg:col-span-5"
+      className="glass flex flex-col gap-4 overflow-hidden py-6 sm:order-6 sm:col-span-6 sm:py-8 lg:order-none lg:col-span-12 lg:flex-row lg:items-center lg:gap-10 lg:py-6 lg:pl-10"
     >
-      <h2 id="clients-title" className="mono-label">
+      <h2 id="clients-title" className="mono-label shrink-0 px-6 sm:px-8 lg:px-0">
         {ui.clients[lang]}
       </h2>
-      <ul className="grid flex-1 grid-cols-2 content-center items-center gap-x-6 gap-y-3 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
-        {clients.map((c) => (
-          <li key={c.name} className="grid h-16 place-items-center rounded-2xl bg-white/70 px-4 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
-            {/* eslint-disable-next-line @next/next/no-img-element -- SVG livianos, no necesitan optimización */}
-            <img src={c.logo} alt={c.name} style={{ maxHeight: c.h }} className="w-full object-contain" loading="lazy" />
-          </li>
-        ))}
-      </ul>
+      <div className="marquee min-w-0 flex-1">
+        <div className="marquee-track">
+          <LogoRow />
+          <LogoRow clone />
+        </div>
+      </div>
     </Card>
   );
 }

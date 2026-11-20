@@ -2,10 +2,10 @@ import { notFound } from "next/navigation";
 import { hasLocale } from "@/i18n";
 import { profile, ui } from "@/content/site";
 import { contact } from "@/content/contact";
-import { archiveProjects, clientProjects, studio } from "@/content/projects";
+import { clientProjects, studio } from "@/content/projects";
 import { HeroCard, ProfileColumn } from "@/components/home/intro";
 import { ClientsCard, ExperienceCard, StackCard, ValooCard } from "@/components/home/details";
-import { ArchiveCard, ProjectCard } from "@/components/project-card";
+import { ProjectCard } from "@/components/project-card";
 import { Card } from "@/components/motion/reveal";
 import { SoundLink } from "@/components/sound/sound-link";
 
@@ -37,11 +37,9 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           <p className="max-w-md text-[15px] text-muted text-pretty">{ui.clientWorkIntro[lang]}</p>
         </div>
         <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-[18px] lg:grid-cols-12">
-          <ProjectCard project={studio} lang={lang} wide />
-          {clientProjects.map((p, i) => (
-            <ProjectCard key={p.slug} project={p} lang={lang} index={(i % 3) + 1} />
+          {[studio, ...clientProjects].map((p, i) => (
+            <ProjectCard key={p.slug} project={p} lang={lang} index={i % 3} />
           ))}
-          <ArchiveCard projects={archiveProjects} lang={lang} />
         </div>
       </section>
 
@@ -57,7 +55,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             {ui.hiringTitle[lang]}
           </h2>
           <p className="mt-3 max-w-xl text-[#a8a8a8] text-pretty sm:text-[17px]">{ui.hiringBody[lang]}</p>
-          <p className="mt-4 font-mono text-sm text-[#d6d6d6]">{contact.email}</p>
+          <p className="mt-4 font-mono text-sm text-accent-bright">{contact.email}</p>
         </div>
         <div className="flex flex-wrap gap-2.5">
           <SoundLink href={`mailto:${contact.email}`} className="btn grow bg-[#f2f2f2] text-ink sm:grow-0">

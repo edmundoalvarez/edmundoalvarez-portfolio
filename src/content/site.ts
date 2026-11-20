@@ -57,6 +57,8 @@ export const ui = {
   soundOn: { es: "Silenciar sonidos", en: "Mute sounds" },
   soundOff: { es: "Activar sonidos", en: "Unmute sounds" },
   openSite: { es: "Abrir sitio", en: "Open site" },
+  otherWork: { es: "Ver otros proyectos", en: "See other work" },
+  architecture: { es: "Arquitectura", en: "Architecture" },
   swipe: { es: "Deslizá", en: "Swipe" },
 } satisfies Record<string, L | Record<string, L>>;
 

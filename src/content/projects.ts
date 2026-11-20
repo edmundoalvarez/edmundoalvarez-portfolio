@@ -14,12 +14,18 @@ export type Project = {
   repo?: string;
 };
 
+type Section = { title: L; body: L };
+
 export type CaseStudy = Project & {
   role: L;
   period: L;
   platforms: L;
-  links: { label: L; href: string }[];
-  sections: { title: L; body: L[] }[];
+  website: string;
+  stores: { appStore: string; googlePlay: string };
+  problem: Section;
+  solution: Section;
+  myRole: Section;
+  architecture: { label: L; items: string[] }[];
 };
 
 /* ------------------------------------------------------------------ */
@@ -34,7 +40,7 @@ export const valoo: CaseStudy = {
     es: "Plataforma de propinas digitales y gestión de equipos para gastronomía. El cliente escanea el QR de quien lo atendió, deja propina y valora el servicio. El comercio arma equipos, junta las propinas en un pozo común y las reparte con reglas propias.",
     en: "Digital tipping and team management platform for hospitality. Guests scan the QR code of the person who served them, leave a tip and rate the service. Venues build teams, pool tips and split them with their own rules.",
   },
-  stack: ["React Native", "Expo", "TypeScript", "Laravel", "MySQL", "Mercado Pago", "Docker", "pnpm", "EAS"],
+  stack: ["React Native", "Expo", "TypeScript", "Laravel", "MySQL", "Mercado Pago", "Docker", "EAS"],
   image: "/projects/icon-valoo.png",
   imageAlt: { es: "Ícono de la app Valoo", en: "Valoo app icon" },
   role: {
@@ -43,65 +49,39 @@ export const valoo: CaseStudy = {
   },
   period: { es: "2025 – actualidad", en: "2025 – present" },
   platforms: { es: "iOS, Android y web", en: "iOS, Android and web" },
-  links: [
-    { label: { es: "Sitio: valoo.la", en: "Website: valoo.la" }, href: "https://valoo.la/" },
-    { label: { es: "App Store", en: "App Store" }, href: "https://apps.apple.com/ar/app/valoo/id6770953091" },
-    { label: { es: "Google Play", en: "Google Play" }, href: "https://play.google.com/store/apps/details?id=la.valoo.app" },
-  ],
-  sections: [
-    {
-      title: { es: "El problema", en: "The problem" },
-      body: [
-        {
-          es: "En gastronomía, cada vez menos clientes pagan en efectivo, y la propina se pierde o queda en manos de pocos. Los comercios no tienen una forma simple y transparente de recibir propinas digitales ni de repartirlas entre todo el equipo.",
-          en: "In hospitality, fewer and fewer guests pay in cash, so tips get lost or end up with only a few people. Venues have no simple, transparent way to collect digital tips or share them across the whole team.",
-        },
-      ],
+  website: "https://valoo.la/",
+  stores: {
+    appStore: "https://apps.apple.com/ar/app/valoo/id6770953091",
+    googlePlay: "https://play.google.com/store/apps/details?id=la.valoo.app",
+  },
+  problem: {
+    title: { es: "El problema", en: "The problem" },
+    body: {
+      es: "En gastronomía, cada vez menos clientes pagan en efectivo, y la propina se pierde o queda en manos de pocos. Los comercios no tienen una forma simple y transparente de recibir propinas digitales ni de repartirlas entre todo el equipo.",
+      en: "In hospitality, fewer and fewer guests pay in cash, so tips get lost or end up with only a few people. Venues have no simple, transparent way to collect digital tips or share them across the whole team.",
     },
-    {
-      title: { es: "La solución", en: "The solution" },
-      body: [
-        {
-          es: "Cada integrante del equipo tiene un QR personal. El cliente lo escanea, deja la propina y valora la atención sin descargar nada. Del lado del comercio, la app permite armar equipos, juntar las propinas en un pozo común y liquidarlas según reglas configurables.",
-          en: "Every team member gets a personal QR code. Guests scan it, leave a tip and rate the service without installing anything. On the venue side, the app lets managers build teams, pool tips and pay them out with configurable rules.",
-        },
-      ],
+  },
+  solution: {
+    title: { es: "La solución", en: "The solution" },
+    body: {
+      es: "Cada integrante del equipo tiene un QR personal. El cliente lo escanea, deja la propina y valora la atención sin descargar nada. Del lado del comercio, la app permite armar equipos, juntar las propinas en un pozo común y repartirlas según reglas propias.",
+      en: "Every team member gets a personal QR code. Guests scan it, leave a tip and rate the service without installing anything. On the venue side, the app lets managers build teams, pool tips and split them with their own rules.",
     },
-    {
-      title: { es: "Mi rol", en: "My role" },
-      body: [
-        {
-          es: "Lo construí de punta a punta como fundador único: investigación, decisiones de producto, modelo de precios, diseño UX/UI y todo el desarrollo, desde la app mobile hasta la API y la publicación en las tiendas.",
-          en: "I built it end to end as sole founder: research, product decisions, pricing model, UX/UI design and all of the engineering, from the mobile app to the API and the store releases.",
-        },
-      ],
+  },
+  myRole: {
+    title: { es: "Mi rol", en: "My role" },
+    body: {
+      es: "Lo construí de punta a punta como fundador único: investigación, decisiones de producto, modelo de precios, diseño UX/UI y todo el desarrollo, desde la app mobile hasta la API y la publicación en las tiendas. También diseñé y desarrollé valoo.la, el sitio que explica el producto y lleva a la descarga.",
+      en: "I built it end to end as sole founder: research, product decisions, pricing model, UX/UI design and all of the engineering, from the mobile app to the API and the store releases. I also designed and built valoo.la, the website that explains the product and drives downloads.",
     },
-    {
-      title: { es: "Arquitectura", en: "Architecture" },
-      body: [
-        {
-          es: "Monorepo TypeScript con pnpm y Docker. La app está hecha con React Native + Expo y comparte un design system multiplataforma: design tokens comunes y capas de UI separadas para web y nativo.",
-          en: "TypeScript monorepo with pnpm and Docker. The app is built with React Native + Expo on top of a cross-platform design system: shared design tokens with separate UI layers for web and native.",
-        },
-        {
-          es: "El backend es una API REST en Laravel + MySQL que resuelve la lógica de pozo común y liquidación de propinas. Los pagos se integran con el checkout de Mercado Pago.",
-          en: "The backend is a Laravel + MySQL REST API that handles tip pooling and payout logic. Payments go through Mercado Pago checkout.",
-        },
-        {
-          es: "CI/CD mobile con EAS Build y EAS Submit para publicar builds en App Store y Google Play.",
-          en: "Mobile CI/CD with EAS Build and EAS Submit to ship builds to the App Store and Google Play.",
-        },
-      ],
-    },
-    {
-      title: { es: "Sitio y lanzamiento", en: "Website and launch" },
-      body: [
-        {
-          es: "También diseñé y desarrollé valoo.la, el sitio del producto: explica cómo funciona para comercios y personal, y lleva a la descarga en App Store y Google Play.",
-          en: "I also designed and built valoo.la, the product website: it explains how Valoo works for venues and staff and drives downloads on the App Store and Google Play.",
-        },
-      ],
-    },
+  },
+  architecture: [
+    { label: { es: "App", en: "App" }, items: ["React Native", "Expo", "TypeScript"] },
+    { label: { es: "API", en: "API" }, items: ["Laravel", "MySQL", "REST"] },
+    { label: { es: "Pagos", en: "Payments" }, items: ["Mercado Pago"] },
+    { label: { es: "Design system", en: "Design system" }, items: ["Design tokens", "Web + iOS + Android"] },
+    { label: { es: "Infraestructura", en: "Infrastructure" }, items: ["Monorepo", "Docker"] },
+    { label: { es: "CI/CD", en: "CI/CD" }, items: ["EAS Build", "EAS Submit"] },
   ],
 };
 

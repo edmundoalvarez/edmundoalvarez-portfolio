@@ -7,9 +7,7 @@ import { clientProjects, studio } from "@/content/projects";
 import { HeroCard, ProfileColumn } from "@/components/home/intro";
 import { ClientsCard, ExperienceCard, StackCard, ValooCard } from "@/components/home/details";
 import { ProjectCard } from "@/components/project-card";
-import { Card } from "@/components/motion/reveal";
-import { SoundLink } from "@/components/sound/sound-link";
-import { LinkedInIcon } from "@/components/ui";
+import { ContactCard } from "@/components/contact-card";
 
 const shell = "mx-auto w-full max-w-[1328px] px-4 sm:px-6 lg:px-14";
 const grid = "grid grid-cols-1 gap-3.5 sm:grid-cols-6 sm:gap-[18px] lg:grid-cols-12";
@@ -71,33 +69,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       </section>
 
       {/* Contacto */}
-      <Card
-        as="section"
-        id="contact"
-        aria-labelledby="contact-title"
-        className="glass-dark mt-10 flex flex-col gap-8 p-7 sm:mt-14 sm:p-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:px-12 lg:py-14"
-      >
-        <div className="min-w-0">
-          <h2 id="contact-title" className="text-[clamp(1.9rem,5vw,2.75rem)] leading-tight font-extrabold tracking-[-0.04em] text-balance">
-            {ui.hiringTitle[lang]}
-          </h2>
-          <p className="mt-3 max-w-xl text-[#a8a8a8] text-pretty sm:text-[17px]">{ui.hiringBody[lang]}</p>
-          <p className="mt-4 font-mono text-sm text-accent-bright">{contact.email}</p>
-        </div>
-        {/* Mobile: email a ancho completo, CV y LinkedIn en dos mitades. */}
-        <div className="grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap lg:shrink-0 lg:flex-nowrap">
-          <SoundLink href={`mailto:${contact.email}`} className="btn col-span-2 bg-[#f2f2f2] text-ink">
-            {ui.emailMe[lang]}
-          </SoundLink>
-          <SoundLink href={profile.cv[lang]} download className="btn btn-ghost-dark">
-            <span className="sm:hidden">CV</span>
-            <span className="hidden sm:inline">{ui.downloadCv[lang]}</span> <span aria-hidden>↓</span>
-          </SoundLink>
-          <SoundLink href={contact.linkedin} className="btn btn-ghost-dark">
-            <LinkedInIcon /> LinkedIn
-          </SoundLink>
-        </div>
-      </Card>
+      <ContactCard lang={lang} id="contact" className="mt-10 sm:mt-14" />
     </div>
   );
 }

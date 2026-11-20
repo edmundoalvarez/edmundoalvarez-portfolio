@@ -95,7 +95,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
         <div className="flex items-center gap-1 sm:gap-2">
           <LangSwitch lang={lang} label={ui.switchTo[lang]} />
           <SoundToggle labelOn={ui.soundOn[lang]} labelOff={ui.soundOff[lang]} />
-          <SoundLink href={`mailto:${contact.email}`} className="btn btn-dark px-4 lg:px-5" aria-label={ui.emailMe[lang]}>
+          <SoundLink href={`mailto:${contact.email}`} className="btn btn-dark size-11 p-0! lg:h-auto lg:w-auto lg:px-5! lg:py-[13px]!" aria-label={ui.emailMe[lang]}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden className="size-4 lg:hidden">
               <rect x="3" y="5" width="18" height="14" rx="2.5" />
               <path d="m4 7 8 6 8-6" />

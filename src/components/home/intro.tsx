@@ -66,11 +66,11 @@ export function ProfileColumn({ lang }: { lang: Locale }) {
           />
         </div>
       </Card>
-      <Card immediate index={2} className="glass grid flex-1 grid-cols-3 content-center gap-2 rounded-[22px]! px-4 py-4 sm:rounded-[26px]! sm:px-5 lg:grid-cols-1 lg:gap-0 lg:divide-y lg:divide-black/[0.07] lg:px-6 lg:py-2">
+      <Card immediate index={2} className="glass flex flex-1 flex-col justify-center divide-y divide-black/[0.07] rounded-[22px]! px-5 py-1.5 sm:rounded-[26px]! lg:px-6 lg:py-2">
         {profile.quickFacts.map((f) => (
-          <div key={f.label.en} className="lg:flex lg:items-baseline lg:justify-between lg:gap-4 lg:py-2.5">
+          <div key={f.label.en} className="flex items-baseline justify-between gap-4 py-2.5">
             <p className="mono-label text-[11px]!">{f.label[lang]}</p>
-            <p className="mt-1 text-[15px] leading-tight font-bold lg:mt-0">{f.value[lang]}</p>
+            <p className="text-right text-[15px] leading-tight font-bold">{f.value[lang]}</p>
           </div>
         ))}
       </Card>

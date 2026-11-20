@@ -104,10 +104,10 @@ export function StackCard({ lang }: { lang: Locale }) {
           {skills.reduce((n, g) => n + g.items.length, 0)} {ui.tools[lang]}
         </p>
       </div>
-      <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <dl className="divide-y divide-black/[0.06] sm:grid sm:grid-cols-2 sm:gap-3 sm:divide-y-0 lg:grid-cols-3">
         {skills.map((group, i) => (
-          <div key={group.group.en} className="rounded-[22px] bg-white/45 p-5 shadow-[inset_0_1px_0_#fff] ring-1 ring-black/[0.04]">
-            <dt className="mb-3.5 flex items-center justify-between">
+          <div key={group.group.en} className="py-4 first:pt-0 last:pb-0 sm:rounded-[22px] sm:bg-white/45 sm:p-5 sm:shadow-[inset_0_1px_0_#fff] sm:ring-1 sm:ring-black/[0.04] sm:first:pt-5 sm:last:pb-5">
+            <dt className="mb-3 flex items-center justify-between sm:mb-3.5">
               <span className="text-[15px] font-bold">{group.group[lang]}</span>
               <span className="font-mono text-[11px] text-muted">{String(i + 1).padStart(2, "0")}</span>
             </dt>

@@ -96,7 +96,7 @@ export const profile = {
   },
   quickFacts: [
     { label: { es: "Ubicación", en: "Location" }, value: { es: "Buenos Aires", en: "Buenos Aires" } },
-    { label: { es: "Trabajo en la UE", en: "EU work permit" }, value: { es: "Ciudadano UE", en: "EU citizen" } },
+    { label: { es: "Ciudadanía", en: "Citizenship" }, value: { es: "Española (UE)", en: "Spanish (EU)" } },
     { label: { es: "Inglés", en: "English" }, value: { es: "B2 profesional", en: "B2 professional" } },
   ],
   cv: {

@@ -150,9 +150,14 @@ export function ClientsCard({ lang }: { lang: Locale }) {
       aria-labelledby="clients-title"
       className="glass flex flex-col gap-4 overflow-hidden py-6 sm:order-6 sm:col-span-6 sm:py-8 lg:order-none lg:col-span-12 lg:flex-row lg:items-center lg:gap-10 lg:py-6 lg:pl-10"
     >
-      <h2 id="clients-title" className="mono-label shrink-0 px-6 sm:px-8 lg:px-0">
-        {ui.clients[lang]}
-      </h2>
+      <div className="shrink-0 px-6 sm:px-8 lg:border-r lg:border-black/[0.08] lg:py-3 lg:pr-10 lg:pl-0">
+        <h2 id="clients-title" className="text-[17px] leading-tight font-bold tracking-tight">
+          {ui.clientsTitle[lang]}
+        </h2>
+        <p className="mt-1 font-mono text-xs text-muted">
+          {clients.length} {ui.clientsCount[lang]}
+        </p>
+      </div>
       <div className="marquee min-w-0 flex-1">
         <div className="marquee-track">
           <LogoRow />

@@ -45,6 +45,8 @@ export const ui = {
   emailMe: { es: "Escribime", en: "Email me" },
   selectedWork: { es: "Trabajos seleccionados", en: "Selected work" },
   clients: { es: "Clientes", en: "Clients" },
+  clientsTitle: { es: "Marcas para las que trabajé", en: "Brands I've built for" },
+  clientsCount: { es: "clientes · web y marca", en: "clients · web & brand" },
   featuredLabel: { es: "Destacado · producto propio", en: "Featured · own product" },
   hiringTitle: { es: "¿Contratando o con un proyecto en mente?", en: "Hiring, or have a project in mind?" },
   hiringBody: {
@@ -82,6 +84,10 @@ export const profile = {
     },
     { es: "Remoto o relocalización", en: "Remote or relocation" },
   ],
+  metaDescription: {
+    es: "Desarrollador Full Stack y React Native en Buenos Aires. Fundador de Lengar Studio y creador de Valoo, publicada en App Store y Google Play. Disponible para remoto o UE.",
+    en: "Full Stack & React Native developer based in Buenos Aires. Founder of Lengar Studio and builder of Valoo, live on the App Store and Google Play. Open to remote or EU roles.",
+  },
   availability: {
     es: "Disponible para roles full-time · remoto o relocalización en la UE",
     en: "Open to full-time roles · remote or EU relocation",

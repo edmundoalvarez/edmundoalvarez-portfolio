@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { hasLocale } from "@/i18n";
-import { profile, ui } from "@/content/site";
+import { profile, skills, ui } from "@/content/site";
+import { SITE_URL } from "@/i18n";
 import { contact } from "@/content/contact";
 import { clientProjects, studio } from "@/content/projects";
 import { HeroCard, ProfileColumn } from "@/components/home/intro";
@@ -16,8 +17,27 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
 
+  const personLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: profile.name,
+    jobTitle: profile.role[lang],
+    description: profile.metaDescription[lang],
+    url: `${SITE_URL}/${lang}`,
+    image: `${SITE_URL}/brand/edmundo.jpg`,
+    email: `mailto:${contact.email}`,
+    address: { "@type": "PostalAddress", addressLocality: "Buenos Aires", addressCountry: "AR" },
+    nationality: [{ "@type": "Country", name: "Argentina" }, { "@type": "Country", name: "Spain" }],
+    worksFor: { "@type": "Organization", name: "Lengar Studio", url: "https://lengarstudio.com" },
+    knowsLanguage: ["es", "en"],
+    knowsAbout: skills.slice(0, 3).flatMap((g) => g.items),
+    sameAs: [contact.linkedin, contact.github],
+  };
+
   return (
     <div className={`${shell} flex flex-col gap-3.5 pt-4 pb-6 sm:gap-[18px] sm:pt-6`}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd).replace(/</g, "\\u003c") }} />
+
       {/* Bento principal. En tablet se reordena con `order`; en mobile y desktop sigue el orden del DOM. */}
       <div className={grid}>
         <HeroCard lang={lang} />

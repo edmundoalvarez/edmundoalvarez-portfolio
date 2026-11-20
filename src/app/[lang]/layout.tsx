@@ -23,13 +23,33 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const title = `${profile.name} · ${profile.role[lang]}`;
-  const description = profile.summary[lang];
+  const description = profile.metaDescription[lang];
 
   return {
     metadataBase: new URL(SITE_URL),
     title: { default: title, template: `%s · ${profile.name}` },
     description,
+    applicationName: profile.name,
     authors: [{ name: profile.name, url: SITE_URL }],
+    creator: profile.name,
+    keywords: [
+      "Edmundo Alvarez",
+      "Full Stack Developer",
+      "React Native Developer",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "Laravel",
+      "Expo",
+      "Buenos Aires",
+      "Remote",
+      "Lengar Studio",
+      "Valoo",
+    ],
+    category: "technology",
+    formatDetection: { email: false, telephone: false, address: false },
+    robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
     alternates: {
       canonical: `/${lang}`,
       languages: { es: "/es", en: "/en", "x-default": "/en" },
@@ -44,6 +64,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
       alternateLocale: lang === "es" ? "en_US" : "es_AR",
     },
     twitter: { card: "summary_large_image", title, description },
+    other: { "profile:first_name": "Edmundo", "profile:last_name": "Alvarez" },
   };
 }
 

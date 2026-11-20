@@ -18,5 +18,5 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   // Todo menos internos de Next y archivos con extensión (imágenes, PDFs, sitemap, etc.)
-  matcher: ["/((?!_next|.*\\..*).*)"],
+  matcher: ["/((?!_next|apple-icon|.*\\..*).*)"],
 };

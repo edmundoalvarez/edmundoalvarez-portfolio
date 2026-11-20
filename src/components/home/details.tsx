@@ -105,12 +105,9 @@ export function StackCard({ lang }: { lang: Locale }) {
         </p>
       </div>
       <dl className="divide-y divide-black/[0.06] sm:grid sm:grid-cols-2 sm:gap-3 sm:divide-y-0 lg:grid-cols-3">
-        {skills.map((group, i) => (
+        {skills.map((group) => (
           <div key={group.group.en} className="py-4 first:pt-0 last:pb-0 sm:rounded-[22px] sm:bg-white/45 sm:p-5 sm:shadow-[inset_0_1px_0_#fff] sm:ring-1 sm:ring-black/[0.04] sm:first:pt-5 sm:last:pb-5">
-            <dt className="mb-3 flex items-center justify-between sm:mb-3.5">
-              <span className="text-[15px] font-bold">{group.group[lang]}</span>
-              <span className="font-mono text-[11px] text-muted">{String(i + 1).padStart(2, "0")}</span>
-            </dt>
+            <dt className="mb-3 text-[15px] font-bold sm:mb-3.5">{group.group[lang]}</dt>
             <dd className="flex flex-wrap gap-1.5">
               {group.items.map((item) => (
                 <span key={item} className="chip chip-hover text-[13px]!">
@@ -155,9 +152,6 @@ export function ClientsCard({ lang }: { lang: Locale }) {
         <h2 id="clients-title" className="text-[17px] leading-tight font-bold tracking-tight">
           {ui.clientsTitle[lang]}
         </h2>
-        <p className="mt-1 font-mono text-xs text-muted">
-          {clients.length} {ui.clientsCount[lang]}
-        </p>
       </div>
       <div className="marquee min-w-0 flex-1">
         <div className="marquee-track">

@@ -15,6 +15,8 @@ type Props = {
   immediate?: boolean;
   /** Tarjeta interactiva: el contenedor se eleva al hacer hover + sonido. */
   interactive?: boolean;
+  /** Fracción visible necesaria para aparecer (0 = apenas asoma, útil en carruseles). */
+  amount?: number;
   className?: string;
   id?: string;
   "aria-labelledby"?: string;
@@ -22,7 +24,7 @@ type Props = {
 };
 
 /** Tarjeta del bento: entra con fade + subida + desenfoque y, si es interactiva, reacciona al puntero. */
-export function Card({ as = "div", index = 0, immediate = false, interactive = false, className = "", children, ...rest }: Props) {
+export function Card({ as = "div", index = 0, immediate = false, interactive = false, amount = 0.15, className = "", children, ...rest }: Props) {
   const reduce = useReducedMotion();
   const { playHover } = useSound();
   const Tag = tags[as] as ElementType;
@@ -35,7 +37,7 @@ export function Card({ as = "div", index = 0, immediate = false, interactive = f
   return (
     <Tag
       initial={hidden}
-      {...(immediate ? { animate: shown } : { whileInView: shown, viewport: { once: true, amount: 0.15 } })}
+      {...(immediate ? { animate: shown } : { whileInView: shown, viewport: { once: true, amount } })}
       transition={transition}
       className={`${interactive ? "lift" : ""} ${className}`}
       {...(interactive ? { onPointerEnter: playHover } : {})}

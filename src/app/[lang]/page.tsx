@@ -60,10 +60,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             </span>
           </p>
         </div>
-        {/* Mobile: carrusel horizontal con scroll-snap. Desde sm: grilla. */}
-        <div className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pt-1 pb-8 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-[18px] sm:overflow-visible sm:p-0 lg:grid-cols-12 [&::-webkit-scrollbar]:hidden">
+        {/* Mobile: carrusel con scroll-snap; cada tarjeta (80vw) queda centrada con las vecinas asomando. Desde sm: grilla. */}
+        <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-[10vw] pt-1 pb-8 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-[18px] sm:overflow-visible sm:p-0 lg:grid-cols-12 [&::-webkit-scrollbar]:hidden">
           {[studio, ...clientProjects].map((p, i) => (
-            <ProjectCard key={p.slug} project={p} lang={lang} index={i % 3} className="w-[84%] shrink-0 snap-start sm:w-auto" />
+            <ProjectCard key={p.slug} project={p} lang={lang} index={i % 3} className="w-[80vw] shrink-0 snap-center sm:w-auto" />
           ))}
         </div>
       </section>

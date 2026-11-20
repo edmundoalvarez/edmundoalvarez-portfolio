@@ -22,6 +22,7 @@ export function ProjectCard({
     <Card
       as="article"
       index={index}
+      amount={0}
       interactive
       className={`glass group flex flex-col p-2.5 sm:p-3 lg:col-span-4 ${className}`}
     >

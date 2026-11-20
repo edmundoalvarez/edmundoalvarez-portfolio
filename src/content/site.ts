@@ -46,7 +46,6 @@ export const ui = {
   selectedWork: { es: "Trabajos seleccionados", en: "Selected work" },
   clients: { es: "Clientes", en: "Clients" },
   clientsTitle: { es: "Marcas para las que trabajé", en: "Brands I've built for" },
-  clientsCount: { es: "clientes · web y marca", en: "clients · web & brand" },
   tools: { es: "herramientas", en: "tools" },
   featuredLabel: { es: "Destacado · producto propio", en: "Featured · own product" },
   hiringTitle: { es: "¿Tenés una posición abierta o un proyecto?", en: "Have an open role or a project in mind?" },

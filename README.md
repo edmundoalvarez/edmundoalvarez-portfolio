@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# edmundoalvarez.com.ar
 
-## Getting Started
+Portfolio personal. Next.js 16 (App Router) + TypeScript + Tailwind CSS 4, bilingüe (`/es`, `/en`) y generado de forma estática.
 
-First, run the development server:
+## Desarrollo
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev        # http://localhost:3000
+pnpm build && pnpm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Dónde se edita cada cosa
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Qué | Archivo |
+|---|---|
+| Perfil, experiencia, skills, educación, textos de UI | `src/content/site.ts` |
+| Proyectos (Valoo, clientes, archivo) | `src/content/projects.ts` |
+| Email, LinkedIn, GitHub | `src/content/contact.ts` |
+| Imágenes de proyectos | `public/projects/` |
+| CVs en PDF | `public/cv/` |
+| Colores (tokens claro/oscuro) | `src/app/globals.css` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Todo el texto usa el tipo `L` (`{ es, en }`), así que TypeScript avisa si falta una traducción.
 
-## Learn More
+## Rutas
 
-To learn more about Next.js, take a look at the following resources:
+- `/` → redirige a `/es` o `/en` según el idioma del navegador (`src/proxy.ts`).
+- `/[lang]` → home.
+- `/[lang]/projects/valoo` → caso de estudio.
+- `/[lang]/opengraph-image`, `/sitemap.xml`, `/robots.txt` → generados.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Pensado para Vercel: importar el repo, sin configuración extra. Después apuntar el dominio `edmundoalvarez.com.ar` a Vercel; los subdominios que sigan en Hostinger (por ejemplo `keepmoving`) se mantienen con su propio registro DNS.

@@ -1,9 +1,8 @@
 import type { NextConfig } from "next";
 
+// Sitio 100 % estático: sin Cache Components, así `dynamicParams = false`
+// devuelve un 404 real para rutas desconocidas.
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
   turbopack: {
     rules: {
       "*.css": {

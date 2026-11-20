@@ -56,11 +56,14 @@ export function SiteHeader({ lang }: { lang: Locale }) {
           scrolled ? "border border-white/90 bg-white/55 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.18)] backdrop-blur-xl" : "border border-transparent"
         }`}
       >
-        <Link href={`/${lang}`} className="flex items-center gap-3 rounded-full font-bold">
-          <span className="grid size-10 place-items-center rounded-xl bg-[linear-gradient(145deg,#3a3a3a,#0e0e0e)] text-[15px] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_6px_14px_rgba(0,0,0,0.25)]">
-            EA
-          </span>
-          <span className="hidden text-lg whitespace-nowrap lg:inline">{profile.name}</span>
+        <Link
+          href={`/${lang}`}
+          aria-label={profile.name}
+          className="shrink-0 rounded-full px-1.5 text-[17px] leading-none tracking-[-0.03em] whitespace-nowrap sm:px-2 sm:text-[19px] lg:text-xl"
+        >
+          <span className="font-extrabold text-ink">Edmundo</span>
+          {/* En tablet el nav ocupa el centro: solo el nombre. */}
+          <span className="font-normal text-[#555] md:max-lg:hidden"> Alvarez</span>
         </Link>
 
         <nav aria-label="Main" className="hidden md:block">

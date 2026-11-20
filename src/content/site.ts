@@ -41,7 +41,7 @@ export const ui = {
   stack: { es: "Stack", en: "Stack" },
   switchTo: { es: "English", en: "Español" },
   skipToContent: { es: "Saltar al contenido", en: "Skip to content" },
-  hello: { es: "Hola, soy Edmundo, desarrollador Full Stack.", en: "Hi, I'm Edmundo, a Full Stack Developer." },
+  hello: { es: "Hola, soy Edmundo.", en: "Hi, I'm Edmundo." },
   emailMe: { es: "Escribime", en: "Email me" },
   selectedWork: { es: "Trabajos seleccionados", en: "Selected work" },
   clients: { es: "Clientes", en: "Clients" },
@@ -57,6 +57,7 @@ export const ui = {
   soundOn: { es: "Silenciar sonidos", en: "Mute sounds" },
   soundOff: { es: "Activar sonidos", en: "Unmute sounds" },
   openSite: { es: "Abrir sitio", en: "Open site" },
+  swipe: { es: "Deslizá", en: "Swipe" },
 } satisfies Record<string, L | Record<string, L>>;
 
 /* ------------------------------------------------------------------ */

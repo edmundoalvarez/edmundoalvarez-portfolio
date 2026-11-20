@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import type { Locale } from "@/i18n";
 import { experience, skills, ui } from "@/content/site";
@@ -126,15 +127,15 @@ export function StackCard({ lang }: { lang: Locale }) {
 
 function LogoRow({ clone = false }: { clone?: boolean }) {
   return (
-    <ul className="flex shrink-0 items-center gap-14 pr-14 sm:gap-20 sm:pr-20" {...(clone ? { "aria-hidden": true, "data-clone": "" } : {})}>
+    <ul className="flex shrink-0 items-center gap-10 pr-10 sm:gap-20 sm:pr-20" {...(clone ? { "aria-hidden": true, "data-clone": "" } : {})}>
       {clients.map((c) => (
-        <li key={c.name} className="flex h-16 shrink-0 items-center">
+        <li key={c.name} className="flex h-12 shrink-0 items-center sm:h-16">
           {/* eslint-disable-next-line @next/next/no-img-element -- SVG livianos, no necesitan optimización */}
           <img
             src={c.logo}
             alt={clone ? "" : c.name}
-            style={{ height: Math.round(c.h * 1.25) }}
-            className="w-auto opacity-80 transition-opacity duration-300 hover:opacity-100"
+            style={{ "--h": `${c.h}px` } as CSSProperties}
+            className="h-(--h) w-auto opacity-80 sm:h-[calc(var(--h)*1.25)] transition-opacity duration-300 hover:opacity-100"
             loading="lazy"
           />
         </li>
@@ -148,7 +149,7 @@ export function ClientsCard({ lang }: { lang: Locale }) {
     <Card
       as="section"
       aria-labelledby="clients-title"
-      className="glass flex flex-col gap-4 overflow-hidden py-6 sm:order-6 sm:col-span-6 sm:py-8 lg:order-none lg:col-span-12 lg:flex-row lg:items-center lg:gap-10 lg:py-6 lg:pl-10"
+      className="glass flex flex-col gap-5 overflow-hidden py-7 sm:order-6 sm:col-span-6 sm:py-8 lg:order-none lg:col-span-12 lg:flex-row lg:items-center lg:gap-10 lg:py-6 lg:pl-10"
     >
       <div className="shrink-0 px-6 sm:px-8 lg:border-r lg:border-black/[0.08] lg:py-3 lg:pr-10 lg:pl-0">
         <h2 id="clients-title" className="text-[17px] leading-tight font-bold tracking-tight">

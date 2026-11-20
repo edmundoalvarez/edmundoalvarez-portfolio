@@ -11,17 +11,19 @@ export function ProjectCard({
   project,
   lang,
   index = 0,
+  className = "",
 }: {
   project: Project;
   lang: Locale;
   index?: number;
+  className?: string;
 }) {
   return (
     <Card
       as="article"
       index={index}
       interactive
-      className="glass group flex flex-col p-2.5 sm:p-3 lg:col-span-4"
+      className={`glass group flex flex-col p-2.5 sm:p-3 lg:col-span-4 ${className}`}
     >
       <div className="relative aspect-[16/10] overflow-hidden rounded-[18px] bg-[#e4e4e4] sm:rounded-[22px]">
         <Image

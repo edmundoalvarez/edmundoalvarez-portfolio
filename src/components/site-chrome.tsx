@@ -8,6 +8,7 @@ import { contact } from "@/content/contact";
 import { LangSwitch } from "./lang-switch";
 import { SoundToggle } from "./sound/sound-toggle";
 import { SoundLink } from "./sound/sound-link";
+import { GitHubIcon, LinkedInIcon } from "./ui";
 
 export function SiteHeader({ lang }: { lang: Locale }) {
   const [scrolled, setScrolled] = useState(false);
@@ -94,12 +95,12 @@ export function SiteHeader({ lang }: { lang: Locale }) {
         <div className="flex items-center gap-1 sm:gap-2">
           <LangSwitch lang={lang} label={ui.switchTo[lang]} />
           <SoundToggle labelOn={ui.soundOn[lang]} labelOff={ui.soundOff[lang]} />
-          <SoundLink href={`mailto:${contact.email}`} className="btn btn-dark px-4 sm:px-5" aria-label={ui.emailMe[lang]}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden className="size-4 sm:hidden">
+          <SoundLink href={`mailto:${contact.email}`} className="btn btn-dark px-4 lg:px-5" aria-label={ui.emailMe[lang]}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden className="size-4 lg:hidden">
               <rect x="3" y="5" width="18" height="14" rx="2.5" />
               <path d="m4 7 8 6 8-6" />
             </svg>
-            <span className="hidden sm:inline">{ui.emailMe[lang]}</span>
+            <span className="hidden lg:inline">{ui.emailMe[lang]}</span>
           </SoundLink>
         </div>
       </div>
@@ -116,10 +117,14 @@ export function SiteFooter({ lang }: { lang: Locale }) {
         </p>
         <ul className="flex gap-5 font-medium">
           <li>
-            <SoundLink href={contact.linkedin} className="hover:text-ink">LinkedIn</SoundLink>
+            <SoundLink href={contact.linkedin} className="inline-flex items-center gap-1.5 hover:text-ink">
+              <LinkedInIcon className="size-3.5" /> LinkedIn
+            </SoundLink>
           </li>
           <li>
-            <SoundLink href={contact.github} className="hover:text-ink">GitHub</SoundLink>
+            <SoundLink href={contact.github} className="inline-flex items-center gap-1.5 hover:text-ink">
+              <GitHubIcon className="size-3.5" /> GitHub
+            </SoundLink>
           </li>
           <li>
             <SoundLink href={`mailto:${contact.email}`} className="hover:text-ink">{ui.emailMe[lang]}</SoundLink>

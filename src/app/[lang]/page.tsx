@@ -9,6 +9,7 @@ import { ClientsCard, ExperienceCard, StackCard, ValooCard } from "@/components/
 import { ProjectCard } from "@/components/project-card";
 import { Card } from "@/components/motion/reveal";
 import { SoundLink } from "@/components/sound/sound-link";
+import { LinkedInIcon } from "@/components/ui";
 
 const shell = "mx-auto w-full max-w-[1328px] px-4 sm:px-6 lg:px-14";
 const grid = "grid grid-cols-1 gap-3.5 sm:grid-cols-6 sm:gap-[18px] lg:grid-cols-12";
@@ -54,11 +55,17 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           <h2 id="projects-title" className="text-3xl font-extrabold tracking-[-0.04em] sm:text-4xl">
             {ui.selectedWork[lang]}
           </h2>
-          <p className="text-[15px] text-muted text-pretty">{ui.clientWorkIntro[lang]}</p>
+          <p className="text-[15px] text-muted text-pretty">
+            {ui.clientWorkIntro[lang]}
+            <span className="ml-1.5 font-mono text-xs whitespace-nowrap text-ink sm:hidden">
+              {ui.swipe[lang]} →
+            </span>
+          </p>
         </div>
-        <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-[18px] lg:grid-cols-12">
+        {/* Mobile: carrusel horizontal con scroll-snap. Desde sm: grilla. */}
+        <div className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pt-1 pb-8 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-[18px] sm:overflow-visible sm:p-0 lg:grid-cols-12 [&::-webkit-scrollbar]:hidden">
           {[studio, ...clientProjects].map((p, i) => (
-            <ProjectCard key={p.slug} project={p} lang={lang} index={i % 3} />
+            <ProjectCard key={p.slug} project={p} lang={lang} index={i % 3} className="w-[84%] shrink-0 snap-start sm:w-auto" />
           ))}
         </div>
       </section>
@@ -77,15 +84,17 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           <p className="mt-3 max-w-xl text-[#a8a8a8] text-pretty sm:text-[17px]">{ui.hiringBody[lang]}</p>
           <p className="mt-4 font-mono text-sm text-accent-bright">{contact.email}</p>
         </div>
-        <div className="flex flex-wrap gap-2.5 lg:shrink-0 lg:flex-nowrap">
-          <SoundLink href={`mailto:${contact.email}`} className="btn grow bg-[#f2f2f2] text-ink sm:grow-0">
+        {/* Mobile: email a ancho completo, CV y LinkedIn en dos mitades. */}
+        <div className="grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap lg:shrink-0 lg:flex-nowrap">
+          <SoundLink href={`mailto:${contact.email}`} className="btn col-span-2 bg-[#f2f2f2] text-ink">
             {ui.emailMe[lang]}
           </SoundLink>
-          <SoundLink href={profile.cv[lang]} download className="btn btn-ghost-dark grow sm:grow-0">
-            {ui.downloadCv[lang]} <span aria-hidden>↓</span>
+          <SoundLink href={profile.cv[lang]} download className="btn btn-ghost-dark">
+            <span className="sm:hidden">CV</span>
+            <span className="hidden sm:inline">{ui.downloadCv[lang]}</span> <span aria-hidden>↓</span>
           </SoundLink>
-          <SoundLink href={contact.linkedin} className="btn btn-ghost-dark grow sm:grow-0">
-            LinkedIn <span aria-hidden>↗</span>
+          <SoundLink href={contact.linkedin} className="btn btn-ghost-dark">
+            <LinkedInIcon /> LinkedIn
           </SoundLink>
         </div>
       </Card>

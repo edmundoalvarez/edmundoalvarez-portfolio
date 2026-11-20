@@ -31,8 +31,8 @@ export const ui = {
     en: "Let's work together",
   },
   contactBody: {
-    es: "Estoy buscando sumarme a un equipo de producto, en remoto o con relocalización. También tomo proyectos puntuales a través de Lengar Studio.",
-    en: "I'm looking to join a product team, remote or with relocation. I also take on client projects through Lengar Studio.",
+    es: "Estoy buscando sumarme a un equipo de producto, en remoto. También tomo proyectos puntuales a través de Lengar Studio.",
+    en: "I'm looking to join a product team, remote. I also take on client projects through Lengar Studio.",
   },
   back: { es: "Volver al inicio", en: "Back to home" },
   role: { es: "Rol", en: "Role" },
@@ -83,15 +83,15 @@ export const profile = {
       es: "Ciudadanía española: trabajo en la UE sin visado",
       en: "Spanish citizen: EU work authorization",
     },
-    { es: "Remoto o relocalización", en: "Remote or relocation" },
+    { es: "Remoto", en: "Remote" },
   ],
   metaDescription: {
-    es: "Desarrollador Full Stack en Buenos Aires, con foco en React, React Native y Laravel. Fundador de Lengar Studio y creador de Valoo. Disponible para remoto o relocalización a la UE.",
-    en: "Full Stack Developer based in Buenos Aires, focused on React, React Native and Laravel. Founder of Lengar Studio and creator of Valoo. Open to remote roles or relocating to the EU.",
+    es: "Desarrollador Full Stack en Buenos Aires, con foco en React, React Native y Laravel. Fundador de Lengar Studio y creador de Valoo. Disponible para trabajar en remoto.",
+    en: "Full Stack Developer based in Buenos Aires, focused on React, React Native and Laravel. Founder of Lengar Studio and creator of Valoo. Open to remote roles.",
   },
   availability: {
-    es: "Disponible para posiciones full-time, en remoto o con relocalización a la UE",
-    en: "Open to full-time roles, remote or relocating to the EU",
+    es: "Disponible para posiciones full-time en remoto",
+    en: "Open to full-time remote roles",
   },
   quickFacts: [
     { label: { es: "Ubicación", en: "Location" }, value: { es: "Buenos Aires", en: "Buenos Aires" } },

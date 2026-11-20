@@ -15,6 +15,16 @@ type SoundApi = {
   playClick: () => void;
 };
 
+type ToneOptions = {
+  type?: OscillatorType;
+  from: number;
+  to?: number;
+  duration: number;
+  gain: number;
+  delay?: number;
+  lowpass?: number;
+};
+
 const SoundContext = createContext<SoundApi | null>(null);
 const STORAGE_KEY = "ea-sound";
 
@@ -69,35 +79,48 @@ export function SoundProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  /** Tono corto: oscilador → envolvente → (filtro) → salida. */
   const tone = useCallback(
-    (type: OscillatorType, from: number, to: number, duration: number, gain: number) => {
+    ({ type = "sine", from, to = from, duration, gain, delay = 0, lowpass }: ToneOptions) => {
       const ctx = ctxRef.current;
       if (!enabled || !unlockedRef.current || !ctx || ctx.state !== "running" || document.hidden) return;
-      const now = ctx.currentTime;
+      const t = ctx.currentTime + delay;
       const osc = ctx.createOscillator();
       const amp = ctx.createGain();
       osc.type = type;
-      osc.frequency.setValueAtTime(from, now);
-      osc.frequency.exponentialRampToValueAtTime(to, now + duration);
-      amp.gain.setValueAtTime(0.0001, now);
-      amp.gain.exponentialRampToValueAtTime(gain, now + 0.006);
-      amp.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-      osc.connect(amp).connect(ctx.destination);
-      osc.start(now);
-      osc.stop(now + duration + 0.02);
+      osc.frequency.setValueAtTime(from, t);
+      if (to !== from) osc.frequency.exponentialRampToValueAtTime(to, t + duration);
+      amp.gain.setValueAtTime(0.0001, t);
+      amp.gain.exponentialRampToValueAtTime(gain, t + 0.003);
+      amp.gain.exponentialRampToValueAtTime(0.0001, t + duration);
+      let node: AudioNode = osc.connect(amp);
+      if (lowpass) {
+        const filter = ctx.createBiquadFilter();
+        filter.type = "lowpass";
+        filter.frequency.value = lowpass;
+        node = amp.connect(filter);
+      }
+      node.connect(ctx.destination);
+      osc.start(t);
+      osc.stop(t + duration + 0.02);
     },
     [enabled],
   );
 
+  // Hover: tick casi imperceptible, estilo sistema operativo.
   const playHover = useCallback(() => {
     if (!canHoverRef.current) return;
-    const t = performance.now();
-    if (t - lastHoverRef.current < 90) return;
-    lastHoverRef.current = t;
-    tone("sine", 1800, 1200, 0.045, 0.025);
+    const now = performance.now();
+    if (now - lastHoverRef.current < 90) return;
+    lastHoverRef.current = now;
+    tone({ type: "square", from: 3800, duration: 0.008, gain: 0.01, lowpass: 6000 });
   }, [tone]);
 
-  const playClick = useCallback(() => tone("triangle", 620, 280, 0.08, 0.07), [tone]);
+  // Click: doble tick (bajar y soltar), como un trackpad.
+  const playClick = useCallback(() => {
+    tone({ type: "square", from: 2400, duration: 0.01, gain: 0.02, lowpass: 4000 });
+    tone({ type: "square", from: 1800, duration: 0.01, gain: 0.015, delay: 0.045, lowpass: 4000 });
+  }, [tone]);
 
   const toggle = useCallback(() => writeStored(!readStored()), []);
 

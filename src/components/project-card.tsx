@@ -46,7 +46,7 @@ export function ProjectCard({
             )}
           </h3>
           {project.url && (
-            <span className="flex shrink-0 items-center gap-1 text-[13px] font-semibold text-muted transition-colors group-hover:text-ink">
+            <span className="flex shrink-0 items-center gap-1 text-[13px] font-semibold text-muted transition-colors group-hover:text-accent">
               {ui.openSite[lang]}
               <ArrowIcon className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </span>

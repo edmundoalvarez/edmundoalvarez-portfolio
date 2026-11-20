@@ -18,11 +18,29 @@ export function SiteHeader({ lang }: { lang: Locale }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Sección visible (scroll-spy): marca con un punto de acento el ítem del nav.
+  const [active, setActive] = useState<string | null>(null);
+  useEffect(() => {
+    const ids = ["work", "experience", "stack", "projects", "contact"];
+    const els = ids.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
+    if (!els.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(entry.target.id === "projects" ? "work" : entry.target.id);
+        }
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   const nav = [
-    { href: `/${lang}#work`, label: ui.nav.work[lang] },
-    { href: `/${lang}#experience`, label: ui.nav.experience[lang] },
-    { href: `/${lang}#stack`, label: ui.nav.skills[lang] },
-    { href: `/${lang}#contact`, label: ui.nav.contact[lang] },
+    { id: "work", href: `/${lang}#work`, label: ui.nav.work[lang] },
+    { id: "experience", href: `/${lang}#experience`, label: ui.nav.experience[lang] },
+    { id: "stack", href: `/${lang}#stack`, label: ui.nav.skills[lang] },
+    { id: "contact", href: `/${lang}#contact`, label: ui.nav.contact[lang] },
   ];
 
   return (
@@ -49,8 +67,21 @@ export function SiteHeader({ lang }: { lang: Locale }) {
           <ul className="flex gap-1 rounded-full border border-white/90 bg-white/55 p-1.5 text-[15px] font-medium shadow-[0_8px_24px_rgba(0,0,0,0.06)]">
             {nav.map((item) => (
               <li key={item.href}>
-                <SoundLink internal href={item.href} className="block rounded-full px-4 py-2 text-muted transition-colors hover:bg-white hover:text-ink lg:px-5">
+                <SoundLink
+                  internal
+                  href={item.href}
+                  aria-current={active === item.id ? "location" : undefined}
+                  className={`relative block rounded-full px-4 py-2 transition-colors hover:bg-white hover:text-ink lg:px-5 ${
+                    active === item.id ? "text-ink" : "text-muted"
+                  }`}
+                >
                   {item.label}
+                  <span
+                    aria-hidden
+                    className={`absolute bottom-[3px] left-1/2 size-1 -translate-x-1/2 rounded-full bg-accent transition-[opacity,transform] duration-300 ${
+                      active === item.id ? "scale-100 opacity-100" : "scale-0 opacity-0"
+                    }`}
+                  />
                 </SoundLink>
               </li>
             ))}

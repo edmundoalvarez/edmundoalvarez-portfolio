@@ -7,7 +7,7 @@ import { ui } from "@/content/site";
 import { Card } from "@/components/motion/reveal";
 import { SoundLink } from "@/components/sound/sound-link";
 import { ContactCard } from "@/components/contact-card";
-import { AppleIcon, GooglePlayIcon } from "@/components/ui";
+import { AppleIcon, ArrowIcon, GooglePlayIcon } from "@/components/ui";
 
 const caseStudies: Record<string, CaseStudy> = { [valoo.slug]: valoo };
 
@@ -91,7 +91,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/[lang]/proje
           {/* Sitio a ancho completo en mobile; tiendas en dos mitades */}
           <div className="grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap">
             <SoundLink href={study.website} className="btn btn-dark col-span-2">
-              {study.website.replace(/^https?:\/\//, "").replace(/\/$/, "")} <span aria-hidden>↗</span>
+              {study.website.replace(/^https?:\/\//, "").replace(/\/$/, "")} <ArrowIcon />
             </SoundLink>
             <SoundLink href={study.stores.appStore} className="btn btn-light">
               <AppleIcon /> App Store

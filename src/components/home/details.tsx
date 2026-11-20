@@ -6,6 +6,7 @@ import { valoo } from "@/content/projects";
 import { clients } from "@/content/clients";
 import { Card } from "@/components/motion/reveal";
 import { SoundLink } from "@/components/sound/sound-link";
+import { ArrowIcon } from "@/components/ui";
 
 const VALOO_CHIPS = ["React Native", "Expo", "TypeScript", "Laravel", "Mercado Pago"];
 
@@ -40,7 +41,7 @@ export function ValooCard({ lang }: { lang: Locale }) {
             {ui.readCase[lang]} <span aria-hidden>→</span>
           </SoundLink>
           <SoundLink href="https://valoo.la/" className="btn btn-light">
-            valoo.la <span aria-hidden>↗</span>
+            valoo.la <ArrowIcon />
           </SoundLink>
         </div>
       </div>

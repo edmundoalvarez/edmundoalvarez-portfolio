@@ -42,23 +42,23 @@ export function HeroCard({ lang }: { lang: Locale }) {
 export function ProfileColumn({ lang }: { lang: Locale }) {
   return (
     <div className="flex flex-col gap-3.5 sm:order-2 sm:col-span-3 sm:gap-[18px] lg:order-none lg:col-span-4">
-      <Card immediate index={1} interactive className="glass flex-1 p-2.5 sm:p-3">
-        <div className="relative aspect-[4/5] max-h-[440px] w-full overflow-hidden rounded-[18px] sm:aspect-auto sm:h-full sm:max-h-none sm:min-h-[320px] sm:rounded-[24px] lg:min-h-[360px]">
+      <Card immediate index={1} interactive className="glass p-2.5 sm:p-3">
+        <div className="relative aspect-square w-full overflow-hidden rounded-[18px] sm:rounded-[24px]">
           <Image
             src="/brand/edmundo.jpg"
             alt={lang === "es" ? "Retrato de Edmundo Alvarez" : "Portrait of Edmundo Alvarez"}
             fill
             priority
             sizes="(min-width: 1024px) 420px, (min-width: 640px) 45vw, 100vw"
-            className="object-cover object-[center_22%]"
+            className="object-cover object-center"
           />
         </div>
       </Card>
-      <Card immediate index={2} className="glass grid grid-cols-3 gap-2 rounded-[22px]! px-4 py-4 sm:rounded-[26px]! sm:px-5">
+      <Card immediate index={2} className="glass grid flex-1 grid-cols-3 content-center gap-2 rounded-[22px]! px-4 py-4 sm:rounded-[26px]! sm:px-5 lg:grid-cols-1 lg:gap-0 lg:divide-y lg:divide-black/[0.07] lg:px-6 lg:py-2">
         {profile.quickFacts.map((f) => (
-          <div key={f.label.en}>
+          <div key={f.label.en} className="lg:flex lg:items-baseline lg:justify-between lg:gap-4 lg:py-2.5">
             <p className="mono-label text-[11px]!">{f.label[lang]}</p>
-            <p className="mt-1 text-[15px] leading-tight font-bold">{f.value[lang]}</p>
+            <p className="mt-1 text-[15px] leading-tight font-bold lg:mt-0">{f.value[lang]}</p>
           </div>
         ))}
       </Card>
